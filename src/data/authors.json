@@ -1,0 +1,13 @@
+{
+  "arun-meti": {
+    "name": "Arun Meti",
+    "nickname": "Arun M",
+    "image": "/assets/avatar.png",
+    "role": "Backend Developer",
+    "socials": [
+      { "name": "Github", "href": "https://github.com/arunmeti2018" },
+      { "name": "LinkedIn", "href": "https://www.linkedin.com/in/arunmeti/" },
+      { "name": "Mail", "href": "mailto:contact@arunmeti.tech" }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getPostUrl } from "@utils/collections";
+
+export const getStaticPaths = (async () => {
+  const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+
+  const redirectPaths: {
+    params: { alias: string };
+    props: { destination: string; postTitle: string };
+  }[] = [];
+
+  for (const post of allPosts) {
+    for (const alias of post.data.aliases || []) {
+      const normalizedAlias = alias.startsWith("/")
+        ? alias.substring(1)
+        : alias;
+      const cleanNormalizedAlias = normalizedAlias.endsWith("/")
+        ? normalizedAlias.slice(0, -1)
+        : normalizedAlias;
+
+      redirectPaths.push({
+        params: { alias: cleanNormalizedAlias },
+        props: {
+          destination: getPostUrl(post),
+          postTitle: post.data.title,
+        },
+      });
+    }
+  }
+
+  return redirectPaths;
+}) satisfies GetStaticPaths;
+
+interface Props {
+  destination: string;
+  postTitle: string;
+}
+
+const { destination, postTitle } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${destination}`} />
+    <link rel="canonical" href={destination} />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting to {postTitle}</title></head
+  >...
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <body>
+    <h1>Redirecting...</h1>
+    <p>You are being redirected to: <a href={destination}>{destination}</a></p>
+    <p>
+      If you are not redirected automatically, <a href={destination}
+        >click here</a
+      >.
+    </p>
+  </body>
+
+
+</html>
