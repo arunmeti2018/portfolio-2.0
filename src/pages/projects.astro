@@ -62,7 +62,7 @@ const sortedProjects = projects.sort((a, b) => {
               "Snake Game": snakeGameImg,
             };
             
-            const thumbnail = thumbnailMap[title] || null;
+            const thumbnail = thumbnailMap[title as keyof typeof thumbnailMap] || null;
             
             return (
               <ScrollReveal client:visible delay={0.04 * i}>
