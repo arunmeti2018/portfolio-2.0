@@ -84,8 +84,7 @@ const shelf = defineCollection({
         "video",
         "documentary",
         "sitcom",
-        "miniseries",
-        "Web Series",
+        "miniseries"
       ]),
       categories: z.array(z.enum(TOPICS)).min(1),
       status: z.enum(["done", "in-progress", "wishlist"]),
