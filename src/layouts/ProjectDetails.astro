@@ -1,0 +1,291 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import { SITE } from "@config";
+import { TbChevronLeft, TbChevronRight, TbBrandGithub, TbExternalLink } from "react-icons/tb";
+import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
+import ScrollReveal from "@components/ScrollReveal";
+import TableOfContents from "@components/TableOfContents.astro";
+import Datetime from "@components/Datetime";
+import ShareLinks from "@components/ShareLinks.astro";
+import { slugifyStr } from "@utils/slugify";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  project: CollectionEntry<"projects">;
+  projects: CollectionEntry<"projects">[];
+}
+
+const { project, projects } = Astro.props;
+
+const {
+  title,
+  author,
+  description,
+  ogImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  techStack,
+  liveLink,
+  githubLink,
+  toc = true,
+} = project.data;
+
+const { Content, headings } = await project.render();
+
+const getProjectIndex = () => projects.findIndex((p) => p.id === project.id);
+const getAdjacentProjects = () => {
+  const index = getProjectIndex();
+  return {
+    prev: projects[index - 1],
+    next: projects[index + 1],
+  };
+};
+
+const { prev, next } = getAdjacentProjects();
+const projectTitle = `${title} | ${SITE.title}`;
+
+// Convert ogImage to string if it's an image object
+const ogImageString = typeof ogImage === 'string' ? ogImage : ogImage?.src ?? undefined;
+---
+
+<Layout
+  title={projectTitle}
+  author={author}
+  description={description}
+  ogImage={ogImageString}
+  canonicalURL={canonicalURL}
+  pubDatetime={pubDatetime}
+  modDatetime={modDatetime}
+  scrollSmooth={true}
+>
+  <Header activeNav="projects" />
+
+  <main id="main-content" class="px-4 sm:px-6">
+    {/* ===== HEADER ===== */}
+    <article class="max-w-4xl mx-auto">
+      <section class="pt-24 sm:pt-20 pb-8 sm:pb-12 border-b border-skin-line/20">
+        <ScrollReveal client:visible>
+          <a
+            href="/projects"
+            class="group inline-flex items-center gap-2 text-sm text-skin-base/50 hover:text-skin-base transition-colors mb-6"
+          >
+            <TbChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Projects</span>
+          </a>
+        </ScrollReveal>
+
+        <ScrollReveal client:visible delay={0.04}>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-skin-base leading-tight mb-4">
+            {title}
+          </h1>
+        </ScrollReveal>
+
+        <ScrollReveal client:visible delay={0.08}>
+          <p class="text-skin-base/70 text-base mb-6 leading-relaxed max-w-2xl">
+            {description}
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal client:visible delay={0.12}>
+          <div class="flex flex-wrap gap-4 items-start justify-between">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-2 text-sm text-skin-base/50">
+                <span>by</span>
+                <span class="font-semibold text-skin-base">{author}</span>
+                <span>—</span>
+                <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} />
+              </div>
+              
+              {modDatetime && (
+                <div class="text-xs text-skin-base/40">
+                  Modified: <Datetime pubDatetime={modDatetime} modDatetime={null} />
+                </div>
+              )}
+            </div>
+
+            <div class="flex gap-3">
+              {githubLink && (
+                <a
+                  href={githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-skin-line/20 text-skin-base/70 hover:text-skin-base hover:border-skin-line/40 transition-all"
+                  title="View Source Code"
+                >
+                  <TbBrandGithub className="w-4 h-4" />
+                  <span class="text-sm">Source</span>
+                </a>
+              )}
+              {liveLink && (
+                <a
+                  href={liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-skin-line/20 text-skin-base/70 hover:text-skin-base hover:border-skin-line/40 transition-all"
+                  title="View Live Project"
+                >
+                  <TbExternalLink className="w-4 h-4" />
+                  <span class="text-sm">Live Demo</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Tech Stack */}
+        <ScrollReveal client:visible delay={0.16}>
+          <div class="mt-8 pt-8 border-t border-skin-line/10">
+            <p class="text-xs font-mono uppercase tracking-widest text-skin-base/40 mb-3">Tech Stack</p>
+            <div class="flex flex-wrap gap-2">
+              {techStack && techStack.map((tech: string) => (
+                <span class="inline-block px-3 py-1.5 text-xs font-mono rounded-sm bg-skin-fill/20 border border-skin-line/10 text-skin-base/70">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* TOC and Content Section */}
+      <section class="py-8 sm:py-12 grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {toc && headings.length > 0 && (
+          <aside class="lg:col-span-1">
+            <div class="sticky top-24">
+              <TableOfContents headings={headings} />
+            </div>
+          </aside>
+        )}
+
+        <div class={toc && headings.length > 0 ? "lg:col-span-3" : "lg:col-span-4"}>
+          <ScrollReveal client:visible>
+            <div class="prose prose-sm sm:prose max-w-none">
+              <Content />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Share Links */}
+      <section class="py-8 sm:py-12 border-t border-skin-line/20">
+        <ScrollReveal client:visible>
+          <p class="text-sm text-skin-base/50 mb-4">Share this project</p>
+          <ShareLinks />
+        </ScrollReveal>
+      </section>
+
+      {/* Navigation */}
+      {(prev || next) && (
+        <section class="py-8 sm:py-12 border-t border-skin-line/20">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {prev && (
+              <ScrollReveal client:visible delay={0.04}>
+                <a
+                  href={`/projects/${slugifyStr(prev.data.title)}`}
+                  class="group flex flex-col gap-2 p-4 rounded-sm border border-skin-line/20 hover:border-skin-line/40 hover:bg-skin-fill/10 transition-all"
+                >
+                  <div class="flex items-center gap-2 text-xs text-skin-base/50 group-hover:text-skin-base transition-colors">
+                    <TbChevronLeft className="w-4 h-4" />
+                    <span>Previous</span>
+                  </div>
+                  <h3 class="font-semibold text-skin-base leading-snug group-hover:text-skin-accent transition-colors">
+                    {prev.data.title}
+                  </h3>
+                </a>
+              </ScrollReveal>
+            )}
+            {next && (
+              <ScrollReveal client:visible delay={0.08}>
+                <a
+                  href={`/projects/${slugifyStr(next.data.title)}`}
+                  class="group flex flex-col gap-2 p-4 rounded-sm border border-skin-line/20 hover:border-skin-line/40 hover:bg-skin-fill/10 transition-all text-right sm:text-left"
+                >
+                  <div class="flex items-center gap-2 text-xs text-skin-base/50 group-hover:text-skin-base transition-colors justify-end sm:justify-start">
+                    <span>Next</span>
+                    <TbChevronRight className="w-4 h-4" />
+                  </div>
+                  <h3 class="font-semibold text-skin-base leading-snug group-hover:text-skin-accent transition-colors">
+                    {next.data.title}
+                  </h3>
+                </a>
+              </ScrollReveal>
+            )}
+          </div>
+        </section>
+      )}
+    </article>
+  </main>
+
+  <ClimbingBackToTop />
+  <Footer />
+</Layout>
+
+<style is:global>
+  .prose {
+    @apply text-skin-base;
+  }
+
+  .prose h2 {
+    @apply font-serif text-2xl font-bold text-skin-base mt-8 mb-4;
+  }
+
+  .prose h3 {
+    @apply font-serif text-xl font-bold text-skin-base mt-6 mb-3;
+  }
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose a {
+    @apply text-skin-accent hover:underline;
+  }
+
+  .prose code {
+    @apply bg-skin-fill/20 px-1.5 py-0.5 rounded text-sm font-mono text-skin-base/80;
+  }
+
+  .prose pre {
+    @apply bg-skin-fill/20 border border-skin-line/10 rounded p-4 overflow-x-auto mb-4;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+
+  .prose ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+
+  .prose li {
+    @apply text-skin-base;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-skin-line/40 pl-4 italic text-skin-base/70 my-4;
+  }
+
+  .prose table {
+    @apply w-full border-collapse mb-4;
+  }
+
+  .prose th,
+  .prose td {
+    @apply border border-skin-line/20 px-3 py-2 text-left;
+  }
+
+  .prose th {
+    @apply bg-skin-fill/10 font-semibold;
+  }
+
+  .prose hr {
+    @apply border-skin-line/20 my-8;
+  }
+</style>

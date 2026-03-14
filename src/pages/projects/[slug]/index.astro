@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import ProjectDetails from "@layouts/ProjectDetails.astro";
+import { slugifyStr } from "@utils/slugify";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects", ({ data }) => !data.draft);
+  return projects.map((project) => ({
+    params: { slug: slugifyStr(project.data.title) },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const allProjects = await getCollection("projects", ({ data }) => !data.draft);
+const sortedProjects = allProjects.sort((a, b) => {
+  const aDate = new Date(a.data.pubDatetime);
+  const bDate = new Date(b.data.pubDatetime);
+  return bDate.getTime() - aDate.getTime();
+});
+
+---
+
+<ProjectDetails project={project} projects={sortedProjects} />

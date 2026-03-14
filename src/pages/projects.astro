@@ -1,0 +1,142 @@
+---
+import { SITE } from "@config";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import { TbBrandGithub, TbExternalLink } from "react-icons/tb";
+import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
+import ScrollReveal from "@components/ScrollReveal";
+import { getCollection } from "astro:content";
+import { slugifyStr } from "@utils/slugify";
+import digitalClosetImg from "@assets/images/digital-closet.png";
+import disasterMgmtImg from "@assets/images/disaster-management.png";
+import snakeGameImg from "@assets/images/snake-game.png";
+
+const projects = await getCollection("projects", ({ data }) => !data.draft);
+const sortedProjects = projects.sort((a, b) => {
+  const aDate = new Date(a.data.pubDatetime);
+  const bDate = new Date(b.data.pubDatetime);
+  return bDate.getTime() - aDate.getTime();
+});
+---
+
+<Layout
+  title={`Projects | ${SITE.title}`}
+  description="Web applications and projects by Arun Meti"
+  ogImage="/projects/og.png"
+>
+  <Header activeNav="projects" />
+
+  <main id="main-content" class="px-4 sm:px-6">
+    {/* ===== HEADER ===== */}
+    <section class="max-w-4xl mx-auto pt-24 sm:pt-20 pb-10">
+      <ScrollReveal client:visible>
+        <span
+          class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 mb-4 block"
+          >Things I've Built</span
+        >
+        <h1
+          class="font-serif text-3xl sm:text-4xl text-skin-base leading-tight mb-3"
+        >
+          Projects
+        </h1>
+        <p class="text-sm text-skin-base/50 leading-relaxed max-w-lg">
+          Web applications and projects — from full-stack apps to interactive
+          games. Click on any project to see detailed information.
+        </p>
+      </ScrollReveal>
+    </section>
+
+    {/* ===== PROJECT LIST ===== */}
+    <section class="max-w-6xl mx-auto pb-12">
+      <div class="flex flex-col gap-5">
+        {
+          sortedProjects.map((project, i) => {
+            const slug = slugifyStr(project.data.title);
+            const { title, description, techStack, liveLink, githubLink } = project.data;
+            
+            // Map project titles to their thumbnail images
+            const thumbnailMap = {
+              "Digital Closet": digitalClosetImg,
+              "Disaster Management System": disasterMgmtImg,
+              "Snake Game": snakeGameImg,
+            };
+            
+            const thumbnail = thumbnailMap[title] || null;
+            
+            return (
+              <ScrollReveal client:visible delay={0.04 * i}>
+                <a
+                  href={`/projects/${slug}`}
+                  class="group border border-skin-line/15 rounded-sm hover:border-skin-line/35 transition-all duration-300 hover:shadow-md hover:shadow-skin-accent/10"
+                  style="display: flex; flex-direction: row; gap: 0;"
+                >
+                  <div style="width: 224px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--color-fill-20); border-right: 1px solid var(--color-line-10); overflow: hidden;">
+                    {thumbnail ? (
+                      <img
+                        src={thumbnail.src}
+                        alt={title}
+                        style="width: 100%; height: 100%; object-fit: contain;"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div style="width: 100%; height: 100%; background: linear-gradient(to bottom right, var(--color-accent-20), var(--color-accent-10)); display: flex; align-items: center; justify-content: center; font-size: 48px; font-family: Georgia, serif; font-weight: bold; color: var(--color-accent-40);">
+                        /
+                      </div>
+                    )}
+                  </div>
+
+                  <div style="flex: 1; padding: 20px 24px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+                    <div class="flex items-start justify-between gap-3 mb-1.5">
+                      <h2 class="font-serif text-base font-bold text-skin-base group-hover:text-skin-accent transition-colors leading-snug">
+                        {title}
+                      </h2>
+                      <div class="flex gap-2 shrink-0 mt-0.5">
+                        {githubLink && (
+                          <a
+                            href={githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-skin-base/30 hover:text-skin-base transition-colors"
+                            title="Source"
+                          >
+                            <TbBrandGithub className="w-4 h-4" />
+                          </a>
+                        )}
+                        {liveLink && (
+                          <a
+                            href={liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-skin-base/30 hover:text-skin-base transition-colors"
+                            title="Live"
+                          >
+                            <TbExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    <p class="text-xs text-skin-base/50 leading-relaxed mb-3 line-clamp-2">
+                      {description}
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5">
+                      {techStack && techStack.map((tech: string) => (
+                        <span class="inline-block px-2 py-0.5 text-[8px] font-mono uppercase tracking-wider border border-skin-line/15 text-skin-base/40 rounded-sm">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              </ScrollReveal>
+            );
+          })
+        }
+      </div>
+    </section>
+  </main>
+  <ClimbingBackToTop />
+  <Footer />
+</Layout>

@@ -37,6 +37,36 @@ const blog = defineCollection({
     }),
 });
 
+const projects = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      author: z.string().default(SITE.author),
+      pubDatetime: z.date(),
+      modDatetime: z.date().optional().nullable(),
+      featured: z.boolean().optional(),
+      draft: z.boolean().optional(),
+      tags: z.array(z.string()).default(["project"]),
+      ogImage: image()
+        .refine(
+          (img: { width: number; height: number }) =>
+            img.width >= 1200 && img.height >= 630,
+          {
+            message: "OpenGraph image must be at least 1200 X 630 pixels!",
+          },
+        )
+        .or(z.string())
+        .optional(),
+      techStack: z.array(z.string()),
+      liveLink: z.string().optional(),
+      githubLink: z.string().optional(),
+      canonicalURL: z.string().optional(),
+      toc: z.boolean().optional().default(true),
+    }),
+});
+
 const shelf = defineCollection({
   type: "content",
   schema: () =>
@@ -55,6 +85,7 @@ const shelf = defineCollection({
         "documentary",
         "sitcom",
         "miniseries",
+        "Web Series",
       ]),
       categories: z.array(z.enum(TOPICS)).min(1),
       status: z.enum(["done", "in-progress", "wishlist"]),
@@ -70,4 +101,4 @@ const shelf = defineCollection({
     }),
 });
 
-export const collections = { blog, shelf };
+export const collections = { blog, projects, shelf };
