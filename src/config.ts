@@ -4,7 +4,7 @@ export const SITE: Site = {
   website: "https://arunmeti.tech/",
   author: "Arun Meti",
   profile: "https://arunmeti.tech/",
-  desc: "Backend Developer with knowledge of web development and design. I offer best projects resulting in quality work.",
+  desc: "Software Engineer at Ittiam Systems. Focused on backend systems, cloud infrastructure, and scalable high-performance applications.",
   title: "Arun Meti",
   ogImage: "og.png",
   lightAndDarkMode: true,

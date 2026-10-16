@@ -5,7 +5,12 @@ import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { TbArrowDown, TbArrowRight } from "react-icons/tb";
+import {
+  TbArrowDown,
+  TbArrowRight,
+  TbBrandGithub,
+  TbExternalLink,
+} from "react-icons/tb";
 import HeroBackground from "@components/HeroBackground";
 import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
 import ScrollReveal from "@components/ScrollReveal";
@@ -15,6 +20,10 @@ import ShelfCard from "@components/ShelfCard.astro";
 import { getCollection } from "astro:content";
 import { withBase } from "@utils/base";
 import { stripExt } from "@utils/shelf";
+import { slugifyStr } from "@utils/slugify";
+import digitalClosetImg from "@assets/images/digital-closet.png";
+import disasterMgmtImg from "@assets/images/disaster-management.png";
+import snakeGameImg from "@assets/images/snake-game.png";
 
 const allPosts = await getAllPosts();
 const sortedPosts = getSortedPosts(allPosts);
@@ -22,6 +31,8 @@ const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const allShelf = await getCollection("shelf");
 const shelfDone = allShelf.filter((i) => i.data.status === "done").slice(0, 6);
+const allProjects = await getCollection("projects", ({ data }) => !data.draft);
+const featuredProjects = allProjects.slice(0, 3);
 ---
 
 <Layout>
@@ -92,10 +103,11 @@ const shelfDone = allShelf.filter((i) => i.data.status === "done").slice(0, 6);
         </h1>
 
         <p
-          class="mt-8 max-w-lg text-sm sm:text-base font-normal leading-relaxed text-skin-base/90 bg-skin-fill/60 backdrop-blur-sm p-4 border border-skin-line/10 rounded-sm"
+          class="mt-8 max-w-xl text-sm sm:text-base font-normal leading-relaxed text-skin-base/90 bg-skin-fill/60 backdrop-blur-sm p-4 border border-skin-line/10 rounded-sm"
         >
-          Backend Developer with knowledge of web development and design.
-          I offer best projects resulting in quality work.
+          Software Engineer at Ittiam Systems. Experienced in backend systems,
+          cloud infrastructure & DevOps, and building scalable full-stack
+          applications. UVCE Graduate.
         </p>
 
         <div class="mt-10 flex flex-col sm:flex-row items-center gap-6">
@@ -120,6 +132,128 @@ const shelfDone = allShelf.filter((i) => i.data.status === "done").slice(0, 6);
         </div>
       </div>
     </section>
+
+    {/* ===== FEATURED PROJECTS ===== */}
+    {
+      featuredProjects.length > 0 && (
+        <section class="py-16 sm:py-20 border-b border-skin-line/15">
+          <ScrollReveal client:visible>
+            <div class="flex items-end justify-between mb-10 border-b border-skin-line/20 pb-4">
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 block mb-1">
+                  Selected Work
+                </span>
+                <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
+                  Featured Projects
+                </h2>
+              </div>
+              <a
+                href={withBase("/projects")}
+                class="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-skin-base/60 hover:text-skin-base transition-colors"
+              >
+                <span>All Projects</span>
+                <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </ScrollReveal>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredProjects.map((project, idx) => {
+              const slug = slugifyStr(project.data.title);
+              const thumbnailMap = {
+                "Digital Closet": digitalClosetImg,
+                "Disaster Management System": disasterMgmtImg,
+                "Snake Game": snakeGameImg,
+              };
+              const thumb =
+                thumbnailMap[project.data.title as keyof typeof thumbnailMap] ||
+                null;
+
+              return (
+                <ScrollReveal client:visible delay={idx * 0.08}>
+                  <div class="group relative flex flex-col h-full border border-skin-line/15 rounded-md hover:border-skin-line/40 bg-skin-card/20 hover:bg-skin-card/50 transition-all duration-300 hover:shadow-lg overflow-hidden">
+                    <a
+                      href={withBase(`/projects/${slug}/`)}
+                      class="block aspect-[16/10] overflow-hidden bg-skin-card-muted/30 border-b border-skin-line/10 relative p-3"
+                    >
+                      {thumb ? (
+                        <img
+                          src={thumb.src}
+                          alt={project.data.title}
+                          class="w-full h-full object-cover rounded transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="w-full h-full flex items-center justify-center font-serif text-3xl text-skin-accent/30 font-bold">
+                          {project.data.title.charAt(0)}
+                        </div>
+                      )}
+                    </a>
+
+                    <div class="p-5 flex flex-col flex-1 justify-between gap-4">
+                      <div>
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                          <a
+                            href={withBase(`/projects/${slug}/`)}
+                            class="group/title inline-block"
+                          >
+                            <h3 class="font-serif text-lg font-bold text-skin-base group-hover/title:text-skin-accent transition-colors leading-snug">
+                              {project.data.title}
+                            </h3>
+                          </a>
+                          <div class="flex items-center gap-1.5 shrink-0">
+                            {project.data.githubLink && (
+                              <a
+                                href={project.data.githubLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="p-1.5 rounded text-skin-base/40 hover:text-skin-base transition-colors"
+                                aria-label={`${project.data.title} GitHub`}
+                              >
+                                <TbBrandGithub className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                            {project.data.liveLink && (
+                              <a
+                                href={project.data.liveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="p-1.5 rounded text-skin-base/40 hover:text-skin-base transition-colors"
+                                aria-label={`${project.data.title} Live`}
+                              >
+                                <TbExternalLink className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <p class="text-xs text-skin-base/65 leading-relaxed line-clamp-2">
+                          {project.data.description}
+                        </p>
+                      </div>
+
+                      <div class="pt-3 border-t border-skin-line/10 flex flex-wrap gap-1">
+                        {project.data.techStack
+                          .slice(0, 3)
+                          .map((tech: string) => (
+                            <span class="px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded border border-skin-line/15 bg-skin-card-muted/50 text-skin-base/60">
+                              {tech}
+                            </span>
+                          ))}
+                        {project.data.techStack.length > 3 && (
+                          <span class="px-1.5 py-0.5 text-[9px] font-mono text-skin-base/40">
+                            +{project.data.techStack.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
 
     {
       featuredPosts.length > 0 && (

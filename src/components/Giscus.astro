@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { mapping = "url" } = Astro.props;
+void mapping;
 ---
 
 <div class="giscus-wrapper">
@@ -15,7 +16,9 @@ const { mapping = "url" } = Astro.props;
   <div class="comments-coming-soon">
     <span class="comments-icon">💬</span>
     <p class="comments-message">Comments coming soon</p>
-    <p class="comments-subtext">Discussion will be enabled once the comments repo is set up.</p>
+    <p class="comments-subtext">
+      Discussion will be enabled once the comments repo is set up.
+    </p>
   </div>
 </div>
 
