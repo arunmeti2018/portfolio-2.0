@@ -6,6 +6,7 @@ slug: "starting-at-ittiam-systems"
 tags:
   [ittiam, software-engineer, career, systems-programming, tech, engineering]
 featured: true
+draft: true
 topic: tech
 description: "Transitioning from student to full-time Software Engineer at Ittiam Systems — diving into high-performance systems, audio/video architectures, and deep engineering."
 aliases:

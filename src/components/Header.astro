@@ -61,6 +61,13 @@ const { activeNav } = Astro.props;
           </li>
           <li>
             <a
+              href={withBase("/blog/")}
+              class={`px-4 py-2 rounded-full transition-all duration-300 ${activeNav === "blog" || activeNav === "posts" ? "bg-skin-inverted text-skin-inverted shadow-md" : "text-skin-base/60 hover:text-skin-base hover:bg-skin-card-muted"}`}
+              >Posts</a
+            >
+          </li>
+          <li>
+            <a
               href={withBase("/projects/")}
               class={`px-4 py-2 rounded-full transition-all duration-300 ${activeNav === "projects" ? "bg-skin-inverted text-skin-inverted shadow-md" : "text-skin-base/60 hover:text-skin-base hover:bg-skin-card-muted"}`}
               >Projects</a
@@ -198,6 +205,14 @@ const { activeNav } = Astro.props;
                     class={`block px-4 py-2.5 rounded-lg text-sm transition-all ${activeNav === "about" ? "bg-skin-fill text-skin-base font-medium" : "text-skin-base/70 hover:bg-skin-fill/50 hover:text-skin-base"}`}
                   >
                     About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={withBase("/blog/")}
+                    class={`block px-4 py-2.5 rounded-lg text-sm transition-all ${activeNav === "blog" || activeNav === "posts" ? "bg-skin-fill text-skin-base font-medium" : "text-skin-base/70 hover:bg-skin-fill/50 hover:text-skin-base"}`}
+                  >
+                    Posts
                   </a>
                 </li>
                 <li>

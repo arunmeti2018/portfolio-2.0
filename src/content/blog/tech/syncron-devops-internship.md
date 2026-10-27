@@ -1,6 +1,6 @@
 ---
 author: arun-meti
-pubDatetime: 2025-12-10
+pubDatetime: 2026-09-23
 title: "From Localhost to Cloud Infrastructure: My DevOps Internship at Syncron"
 slug: "syncron-devops-internship"
 tags: [devops, syncron, cloud, docker, kubernetes, ci-cd, internship, tech]
@@ -12,59 +12,90 @@ aliases:
   - /blog/syncron-devops-internship
 ---
 
-## Crossing the Enterprise Threshold
+Your first internship is a strange mix of excitement and quiet panic.
 
-Up until the summer of my pre-final year, my engineering world was largely self-contained. Like most student developers, my definition of "deployment" was pushing code to GitHub and letting managed platforms like Render, Vercel, or Netlify handle the magic behind the scenes. If something broke, it was usually because of a typo or a misconfigured local environment variable.
+You're eager to work on real problems, nervous about whether you're good enough, and secretly hoping no one asks something you can't answer. Now add being the **only intern on the team** — that's exactly where I found myself at Syncron.
 
-Joining **Syncron** as a **DevOps Intern** dismantled that simplistic worldview within my first week.
+I joined as a backend developer. I left having done backend, frontend, *and* DevOps.
 
-Syncron is a global leader delivering intelligent SaaS solutions for after-sales service optimization and supply chain management to major global enterprises. When you operate at that scale, software engineering isn’t just about writing clever backend code—it is about ensuring that systems remain reliable, secure, reproducible, and resilient under massive production demands.
+My career, apparently, wanted to explore its options before I did.
 
-## The Paradigm Shift: Beyond "It Works on My Machine"
+## The Only Intern in the Room
 
-The fundamental philosophy of DevOps became apparent immediately: eliminate friction between development and operations through automation and infrastructure transparency.
+Everyone around me had experience. I had enthusiasm and a lot of unanswered questions.
 
-Here were the core pillars I immersed myself in during the internship:
+But the team was supportive from day one. Nobody expected me to know everything, and that made all the difference.
 
-### 1. Containerization & Orchestration (Docker & Kubernetes)
+## Welcome to DevOps. What Does It Even Do?
 
-Packaging services isn't just about bundling dependencies; it is about guaranteeing deterministic runtime environments. I worked extensively with:
+DevOps wasn't something I knew much about before the internship. And then, suddenly, I was working in it.
 
-- Crafting optimized, multi-stage Dockerfiles to minimize container image sizes and attack surfaces.
-- Understanding Kubernetes architectures—Pods, Deployments, Services, ConfigMaps, and Ingress controllers.
-- Managing resource quotas, liveness/readiness probes, and self-healing deployments.
+This is where my mentors made all the difference.
 
-### 2. CI/CD Pipelines as Living Code
+One of them was a backend developer who also handled DevOps. He didn't just help me get things done — he helped me understand *why* we were doing them. That distinction matters more than it sounds.
 
-A great CI/CD pipeline is the safety net of any engineering team. At Syncron, pipelines are treated as first-class software:
+The other mentor had a piece of advice that stuck with me:
 
-- Automating build pipelines with rigorous static code analysis, linting, and automated unit/integration test gates.
-- Managing artifact repositories and container registries with automated vulnerability scanning.
-- Designing deployment pipelines that enable zero-downtime rolling updates and automated rollback triggers when anomalous error rates are detected.
+> *"You can only say you've mastered a programming language after writing at least 80,000 lines of code yourself — without AI."*
 
-### 3. Infrastructure as Code (IaC) & Cloud Architecture
+Whether the number is right is debatable. But the message isn't: there's a real difference between **consuming** knowledge and actually **building** a skill. The struggle is the learning. You have to write the code, break things, fix them, and get stuck — because that's what builds your foundation.
 
-Managing cloud resources through a web console is fine for weekend hobby projects; in production, every single cloud resource must be codified and version-controlled.
+Between their guidance and their wisdom, I had two people who shaped my early understanding of engineering in ways I'm genuinely grateful for.
 
-- Translating architectural requirements into declarative configuration.
-- Understanding networking in the cloud: VPCs, subnets, routing tables, security groups, and SSL/TLS termination.
-- Ensuring least-privilege IAM policies to protect cloud perimeters.
+## That Feeling When You're Working in Production
 
-### 4. Observability, Telemetry, and Reliability
+There's learning DevOps, and then there's learning DevOps on **live production systems**.
 
-You cannot maintain what you cannot measure. One of the most fascinating aspects was diving into metrics, structured logging, and tracing:
+You double-check the command. You read it again. You *know* what you're supposed to do.
 
-- Setting up alerts and dashboards to track CPU, memory saturation, request latencies, and HTTP error rate anomalies.
-- Understanding SLOs (Service Level Objectives) and SLAs in enterprise contracts.
+You hit Enter.
 
-## Key Lessons in Engineering Discipline
+For a brief moment, your entire career flashes before your eyes.
 
-Beyond the technical tools, the internship shaped how I approach software design forever:
+That tiny spike of anxiety taught me something important: being a good engineer isn't just about making things work. It's about **making changes carefully**, understanding their impact, and respecting what's at stake. Production has a way of keeping your ego in check.
 
-1. **Automation Over Manual Interventions**: Any repetitive manual task is a bug waiting to happen. If you have to do something twice, script it. If you have to do it thrice, automate it in a pipeline.
-2. **Blast Radius Minimization**: Good engineers assume things _will_ fail. Great architectures isolate failures so that a fault in one service never brings down the entire ecosystem.
-3. **Empathy for the Developer Experience**: DevOps is not about policing code; it is about building developer velocity. When your tools make it effortless for engineers to build, test, and ship confidently, the whole organization moves faster.
+## The Cross-Team Coordination Saga
+
+Not every challenge was technical. Some involved raising requests with the Central DevOps team.
+
+You have a requirement. You raise a request. You explain it. Someone asks for more details. Another discussion. Another clarification.
+
+Somewhere along the way, you realise that getting things done involves more than knowing *how* to do them. There are dependencies, processes, and priorities — and occasionally some spirited cross-functional alignment discussions.
+
+It was a good introduction to the fact that engineering isn't just about technology. It's also about **communication, collaboration, and patience**.
+
+Mostly patience.
+
+## The Best Part? Lunch Breaks
+
+Whenever my manager came to the office — roughly once every two weeks — he'd take us out for lunch.
+
+Honestly, one of the best parts of the internship.
+
+Stepping away from the screen, having real conversations, being seen as a person rather than just an intern — those small moments left a lasting impression. It's easy to overlook them when you're focused on proving yourself, but they're often what makes a workplace memorable.
+
+## Things I Learned That Weren't in the Job Description
+
+- It's okay to be the least experienced person in the room. That's often where you learn the most.
+- Asking questions beats pretending to understand and going in the wrong direction for three hours.
+- Tutorials are useful, but there's no substitute for actually building things yourself.
+- Approach production with care — a command that takes a second to run can take hours to undo.
+- Working across teams requires patience, communication, and the occasional translation of your requirements into a language everyone agrees on.
+- Having the right people around you when you're starting out can change everything.
 
 ## Looking Back
 
-My internship at Syncron was a transformative rite of passage. It bridged the gap between academic programming and enterprise-grade reliability engineering. It demystified the cloud, grounded my backend instincts in operational realities, and gave me the confidence to design robust systems from the ground up.
+I joined with excitement, a fair amount of nerves, and a very different idea of what I'd be doing.
+
+I left with new skills, a better understanding of how engineering teams actually work, and foundations I'm still building on.
+
+But what I remember most isn't the technologies or the tasks — it's the people. My mentors who guided me patiently through unfamiliar territory. The nervousness of working in production. The cross-team debates. And the lunches that made the office feel less empty.
+
+Becoming an engineer isn't just about writing better code. It's about learning how to think, how to work with people, and how to keep going when you have absolutely no idea what you're doing.
+
+As for 80,000 lines of code — I'm still working on that.
+
+---
+
+*Some experiences teach you technology. Others teach you how to become the person who builds it. My time at Syncron did a little of both.*
+

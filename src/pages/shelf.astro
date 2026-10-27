@@ -43,7 +43,13 @@ const sections = typeOrder
     key: t,
     label: SHELF_TYPE[t].label + "s",
     icon: SHELF_TYPE[t].icon,
-    items: allItems.filter((i) => i.data.type === t),
+    items: allItems
+      .filter((i) => i.data.type === t)
+      .sort((a, b) => {
+        const aPin = a.data.pinned || a.data.featured ? 1 : 0;
+        const bPin = b.data.pinned || b.data.featured ? 1 : 0;
+        return bPin - aPin;
+      }),
   }));
 ---
 

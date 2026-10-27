@@ -7,273 +7,224 @@ import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
 import ScrollReveal from "@components/ScrollReveal";
 import { SITE } from "@config";
 import { withBase } from "@utils/base";
-import { TbArrowRight } from "react-icons/tb";
+import { TbArrowRight, TbCode, TbMovie, TbBrain } from "react-icons/tb";
 ---
 
 <Layout
   title={`About | ${SITE.title}`}
-  description="Learn more about Arun Meti — backend developer with expertise in web development and design."
+  description="Learn more about Arun Meti — software engineer, systems builder, and creative thinker."
   ogImage="/about/og.png"
 >
-  <Header />
+  <Header activeNav="about" />
 
-  <main id="main-content" class="max-w-5xl mx-auto px-4 sm:px-6">
-    {/* ===== HERO ===== */}
+  <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-16">
+    {/* ===== HERO PROFILE CARD ===== */}
     <section
-      class="relative border-x border-skin-line/10 mt-20 sm:mt-8 overflow-hidden rounded-sm"
+      class="relative border border-skin-line/15 rounded-2xl p-6 sm:p-10 bg-skin-card/40 backdrop-blur-md shadow-sm overflow-hidden"
     >
+      {/* Decorative subtle ambient glow */}
       <div
-        class="absolute inset-0 -z-10 opacity-[0.04] pointer-events-none"
-        style="background-image: radial-gradient(circle at 30% 20%, rgba(var(--color-accent), 0.6) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(var(--color-collection-philosophy), 0.4) 0%, transparent 50%);"
-      >
-      </div>
+        class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-skin-accent/5 blur-3xl pointer-events-none"
+      ></div>
 
-      <div
-        class="absolute top-0 left-0 w-8 h-8 border-t border-l border-skin-text-base/20"
-      >
-      </div>
-      <div
-        class="absolute top-0 right-0 w-8 h-8 border-t border-r border-skin-text-base/20"
-      >
-      </div>
-      <div
-        class="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-skin-text-base/20"
-      >
-      </div>
-      <div
-        class="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-skin-text-base/20"
-      >
-      </div>
+      <div class="flex flex-col sm:flex-row items-start gap-6 sm:gap-8">
+        {/* Avatar with status indicator */}
+        <div class="relative shrink-0 mx-auto sm:mx-0">
+          <div
+            class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border border-skin-line/25 shadow-md bg-skin-card"
+          >
+            <img
+              src={withBase("/assets/luffy.png")}
+              alt="Arun Meti"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="absolute -bottom-1 -right-1 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-skin-card border border-skin-line/20 shadow-sm"
+            title="Available"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-[9px] font-mono uppercase tracking-wider text-skin-base/70">Active</span>
+          </div>
+        </div>
 
-      <div class="w-full py-16 sm:py-20 px-4 sm:px-8">
-        <div
-          class="flex flex-col sm:flex-row items-center sm:items-start gap-8"
-        >
-          <div class="relative shrink-0">
-            <div
-              class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-skin-line/20"
+        {/* Info */}
+        <div class="flex-1 w-full text-center sm:text-left">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span
+              class="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-widest bg-skin-inverted text-skin-inverted font-medium"
             >
-              <img
-                src={withBase("/assets/luffy.png")}
-                alt="Arun M"
-                class="w-full h-full object-cover"
-              />
+              Engineer
+            </span>
+            <span class="text-skin-base/30 text-xs">/</span>
+            <span class="text-xs font-mono text-skin-base/60">Ittiam Systems</span>
+          </div>
+
+          <h1
+            class="font-serif text-3xl sm:text-4xl lg:text-5xl text-skin-base leading-tight mb-3"
+          >
+            Arun Meti
+          </h1>
+
+          <p class="text-sm sm:text-base text-skin-base/75 leading-relaxed mb-6 font-normal">
+            Software Engineer at <strong>Ittiam Systems</strong> and UVCE Computer Science graduate.
+            Previously DevOps Intern at <strong>Syncron</strong> and UVCE Placement Coordinator.
+            Focused on backend architecture, cloud infrastructure, and building resilient systems that actually hold up in production.
+          </p>
+
+          {/* Quick Technical Matrix */}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-skin-base/75 mb-6 text-left">
+            <div class="p-3 rounded-lg border border-skin-line/10 bg-skin-fill/50">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-skin-base/40 block mb-1">Languages</span>
+              <span class="font-mono text-xs text-skin-base/85 font-medium">C, C++, JavaScript, Python, HTML/CSS, EJS</span>
             </div>
-            <div
-              class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-green-500 border-2 border-skin-fill"
-              title="Available"
-            >
+            <div class="p-3 rounded-lg border border-skin-line/10 bg-skin-fill/50">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-skin-base/40 block mb-1">Backend & Data</span>
+              <span class="font-mono text-xs text-skin-base/85 font-medium">Node.js, Express, MongoDB, MySQL, Firebase, REST</span>
+            </div>
+            <div class="p-3 rounded-lg border border-skin-line/10 bg-skin-fill/50">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-skin-base/40 block mb-1">Tools & DevOps</span>
+              <span class="font-mono text-xs text-skin-base/85 font-medium">Git, GitHub, Docker, Linux, Postman API, VS Code</span>
+            </div>
+            <div class="p-3 rounded-lg border border-skin-line/10 bg-skin-fill/50">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-skin-base/40 block mb-1">Core Fundamentals</span>
+              <span class="font-mono text-xs text-skin-base/85 font-medium">DSA, OOPs, DBMS, Operating Systems, Networks</span>
             </div>
           </div>
 
-          <div class="text-center sm:text-left">
-            <span
-              class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 mb-2 block"
-              >About</span
+          {/* Action CTAs */}
+          <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+            <a
+              href={withBase("/resume/")}
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-skin-inverted text-skin-inverted hover:bg-skin-accent transition-all font-mono text-xs uppercase tracking-widest rounded-lg shadow-sm"
             >
-            <h1
-              class="font-serif text-4xl sm:text-5xl text-skin-base leading-tight mb-3"
+              Resume
+            </a>
+            <a
+              href="mailto:arunameti2024@gmail.com"
+              class="inline-flex items-center gap-2 px-5 py-2.5 border border-skin-line/30 hover:border-skin-base/60 text-skin-base/80 hover:text-skin-base hover:bg-skin-card transition-all font-mono text-xs uppercase tracking-widest rounded-lg"
             >
-              Arun Meti
-            </h1>
-            <p
-              class="text-base text-skin-base/70 leading-relaxed max-w-xl mb-4"
-            >
-              I'm a Software Engineer at <strong>Ittiam Systems</strong>, a UVCE
-              Computer Science graduate, and formerly a DevOps Intern at <strong
-                >Syncron</strong
-              > as well as a UVCE Placement Coordinator. I'm passionate about building
-              scalable backend architectures, high-performance systems, and streamlined
-              cloud infrastructure.
-            </p>
-            <div
-              class="space-y-2 text-sm text-skin-base/60 leading-relaxed max-w-xl mb-6"
-            >
-              <p>
-                <strong class="text-skin-base">Languages:</strong> C++, JavaScript,
-                TypeScript, Python, HTML/CSS
-              </p>
-              <p>
-                <strong class="text-skin-base">Backend & Data:</strong> Node.js,
-                Express.js, MongoDB, REST APIs, SQL
-              </p>
-              <p>
-                <strong class="text-skin-base">Cloud, DevOps & Tools:</strong> Docker,
-                Kubernetes, CI/CD Pipelines, Git, Linux, Postman
-              </p>
-            </div>
-            <div
-              class="flex flex-wrap items-center justify-center sm:justify-start gap-3"
-            >
-              <a
-                href={withBase("/resume/")}
-                class="inline-flex items-center gap-2 px-4 py-2 bg-skin-inverted text-skin-inverted hover:bg-skin-accent transition-colors font-mono text-[10px] uppercase tracking-widest rounded-sm"
-              >
-                Resume
-              </a>
-              <a
-                href="mailto:contact@arunmeti.tech"
-                class="inline-flex items-center gap-2 px-4 py-2 border border-skin-line/40 hover:border-skin-base/60 text-skin-base/70 hover:text-skin-base transition-all font-mono text-[10px] uppercase tracking-widest rounded-sm"
-              >
-                Get in Touch
-              </a>
-            </div>
+              Get in Touch
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    {/* ===== INTERESTS ===== */}
-    <section class="w-full py-12 sm:py-14 border-t border-skin-line/20">
+    {/* ===== INTERESTS & CURATIONS ===== */}
+    <section class="w-full mt-12 sm:mt-16">
       <ScrollReveal client:visible>
-        <span
-          class="font-mono text-[10px] uppercase tracking-widest text-skin-base/35 mb-8 block"
-          >What I care about</span
-        >
+        <div class="flex items-baseline justify-between mb-5">
+          <h2 class="font-serif text-xl sm:text-2xl text-skin-base">What I Care About</h2>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40">Explorations</span>
+        </div>
       </ScrollReveal>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* Tech Card */}
         <ScrollReveal client:visible delay={0.05}>
           <a
             href={withBase("/tech/")}
-            class="group block p-6 border border-skin-line/15 rounded-sm hover:border-skin-line/40 transition-all duration-300"
+            class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
           >
-            <div class="flex items-center gap-2 mb-3">
-              <span
-                class="w-2 h-2 rounded-full"
-                style="background: rgb(var(--color-collection-tech))"></span>
-              <span
-                class="font-mono text-[10px] uppercase tracking-widest"
-                style="color: rgb(var(--color-collection-tech))">Tech</span
-              >
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-2.5 h-2.5 rounded-full"
+                    style="background: rgb(var(--color-collection-tech))"
+                  ></span>
+                  <span
+                    class="font-mono text-xs uppercase tracking-widest font-medium"
+                    style="color: rgb(var(--color-collection-tech))"
+                  >
+                    Tech
+                  </span>
+                </div>
+                <TbCode className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
+              </div>
+              <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
+                Open-source software, high-performance computing, cloud architectures, and the craft of reliable engineering.
+              </p>
             </div>
-            <p class="text-sm text-skin-base/50 leading-relaxed">
-              Open-source tools, programming languages, high-performance
-              computing, and the craft of building things that work.
-            </p>
             <span
-              class="mt-4 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-skin-base/30 group-hover:text-skin-base/60 transition-colors"
+              class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
             >
-              Explore <TbArrowRight
-                className="w-3 h-3 group-hover:translate-x-1 transition-transform"
-              />
+              Explore Tech <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </span>
           </a>
         </ScrollReveal>
 
+        {/* Cinema Card */}
         <ScrollReveal client:visible delay={0.1}>
           <a
             href={withBase("/cinema/")}
-            class="group block p-6 border border-skin-line/15 rounded-sm hover:border-skin-line/40 transition-all duration-300"
+            class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
           >
-            <div class="flex items-center gap-2 mb-3">
-              <span
-                class="w-2 h-2 rounded-full"
-                style="background: rgb(var(--color-collection-cinema))"></span>
-              <span
-                class="font-mono text-[10px] uppercase tracking-widest"
-                style="color: rgb(var(--color-collection-cinema))">Cinema</span
-              >
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-2.5 h-2.5 rounded-full"
+                    style="background: rgb(var(--color-collection-cinema))"
+                  ></span>
+                  <span
+                    class="font-mono text-xs uppercase tracking-widest font-medium"
+                    style="color: rgb(var(--color-collection-cinema))"
+                  >
+                    Cinema
+                  </span>
+                </div>
+                <TbMovie className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
+              </div>
+              <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
+                Films as philosophy, the poetry of visual framing, storytelling craft, and scenes that refuse to leave your memory.
+              </p>
             </div>
-            <p class="text-sm text-skin-base/50 leading-relaxed">
-              Films as philosophy, the craft of storytelling, and why some
-              images refuse to leave your mind.
-            </p>
             <span
-              class="mt-4 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-skin-base/30 group-hover:text-skin-base/60 transition-colors"
+              class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
             >
-              Explore <TbArrowRight
-                className="w-3 h-3 group-hover:translate-x-1 transition-transform"
-              />
+              Explore Cinema <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </span>
           </a>
         </ScrollReveal>
 
+        {/* Philosophy Card */}
         <ScrollReveal client:visible delay={0.15}>
           <a
             href={withBase("/philosophy/")}
-            class="group block p-6 border border-skin-line/15 rounded-sm hover:border-skin-line/40 transition-all duration-300"
+            class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
           >
-            <div class="flex items-center gap-2 mb-3">
-              <span
-                class="w-2 h-2 rounded-full"
-                style="background: rgb(var(--color-collection-philosophy))"
-              ></span>
-              <span
-                class="font-mono text-[10px] uppercase tracking-widest"
-                style="color: rgb(var(--color-collection-philosophy))"
-                >Philosophy</span
-              >
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-2.5 h-2.5 rounded-full"
+                    style="background: rgb(var(--color-collection-philosophy))"
+                  ></span>
+                  <span
+                    class="font-mono text-xs uppercase tracking-widest font-medium"
+                    style="color: rgb(var(--color-collection-philosophy))"
+                  >
+                    Philosophy
+                  </span>
+                </div>
+                <TbBrain className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
+              </div>
+              <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
+                Questions that refuse to settle — ethics, metaphysics, consciousness, and what it means to live thoughtfully.
+              </p>
             </div>
-            <p class="text-sm text-skin-base/50 leading-relaxed">
-              Ideas that refuse to sit still — meaning, ethics, consciousness,
-              and the human condition.
-            </p>
             <span
-              class="mt-4 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-skin-base/30 group-hover:text-skin-base/60 transition-colors"
+              class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
             >
-              Explore <TbArrowRight
-                className="w-3 h-3 group-hover:translate-x-1 transition-transform"
-              />
+              Explore Philosophy <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </span>
           </a>
         </ScrollReveal>
       </div>
     </section>
 
-    {/* ===== COLOPHON ===== */}
-    <section class="w-full py-12 sm:py-14 border-t border-skin-line/20">
-      <ScrollReveal client:visible>
-        <div class="flex flex-col sm:flex-row sm:items-start gap-8 sm:gap-16">
-          <div class="sm:w-1/2">
-            <span
-              class="font-mono text-[10px] uppercase tracking-widest text-skin-base/35 mb-4 block"
-              >Colophon</span
-            >
-            <p class="text-sm text-skin-base/50 leading-relaxed">
-              Built with <a
-                href="https://astro.build/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-skin-accent hover:underline">Astro</a
-              >, styled with <a
-                href="https://tailwindcss.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-skin-accent hover:underline">Tailwind CSS</a
-              >, and deployed on <a
-                href="https://pages.github.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-skin-accent hover:underline">GitHub Pages</a
-              >. Search powered by <a
-                href="https://pagefind.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-skin-accent hover:underline">Pagefind</a
-              >. Based on <a
-                href="https://github.com/satnaing/astro-paper"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-skin-accent hover:underline">Astro Paper</a
-              >, heavily modified.
-            </p>
-          </div>
-
-          <div class="sm:w-1/2">
-            <span
-              class="font-mono text-[10px] uppercase tracking-widest text-skin-base/35 mb-4 block"
-              >Elsewhere</span
-            >
-            <div
-              class="flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity"
-            >
-              <Socials />
-            </div>
-          </div>
-        </div>
-      </ScrollReveal>
-    </section>
   </main>
 
   <ClimbingBackToTop />

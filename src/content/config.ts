@@ -1,7 +1,7 @@
 import { SITE } from "@config";
 import { defineCollection, z } from "astro:content";
 
-export const TOPICS = ["tech", "cinema", "philosophy"] as const;
+export const TOPICS = ["tech", "cinema", "philosophy", "book"] as const;
 export type Topic = (typeof TOPICS)[number];
 
 const blog = defineCollection({
@@ -88,6 +88,8 @@ const shelf = defineCollection({
       ]),
       categories: z.array(z.enum(TOPICS)).min(1),
       status: z.enum(["done", "in-progress", "wishlist"]),
+      featured: z.boolean().optional(),
+      pinned: z.boolean().optional(),
       rating: z.number().min(0).max(10).optional(),
       year: z.number().optional(),
       description: z.string().optional(),

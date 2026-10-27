@@ -4,7 +4,7 @@ creator: "Plato"
 genre: "Philosophy"
 type: "book"
 categories: ["philosophy"]
-status: "done"
+status: "in-progress"
 rating: 9
 year: -399
 description: "A Socratic dialogue exploring understanding of piety and morality, challenging the foundation of divine command theory."

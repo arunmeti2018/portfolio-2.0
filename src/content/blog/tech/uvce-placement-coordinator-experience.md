@@ -5,6 +5,7 @@ title: "Behind the Hiring Curtain: What Serving as a UVCE Placement Coordinator 
 slug: "uvce-placement-coordinator-experience"
 tags: [uvce, placement-coordinator, leadership, career, management, tech]
 featured: true
+draft: true
 topic: tech
 description: "Managing high-stakes recruitment drives, coordinating with industry leaders, and navigating the emotional rollercoaster of campus placements from the inside."
 aliases:

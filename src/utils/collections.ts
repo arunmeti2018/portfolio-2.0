@@ -21,6 +21,11 @@ export const COLLECTION_META: Record<
     prefix: "/philosophy",
     description: "Reflections on ideas, meaning, and the human condition.",
   },
+  book: {
+    label: "Books",
+    prefix: "/book",
+    description: "Books I've read, loved, or thought about for too long.",
+  },
 };
 
 export function getPostSlug(post: AnyPost): string {

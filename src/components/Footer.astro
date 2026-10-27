@@ -12,62 +12,69 @@ const { noMarginTop = false } = Astro.props;
 ---
 
 <footer class={`w-full ${noMarginTop ? "" : "mt-auto"}`}>
-  <div class="w-full h-[1px] bg-skin-line/30 mb-12"></div>
+  <div class="w-full h-[1px] bg-skin-line/20"></div>
 
-  <div class="flex flex-col items-center py-12 gap-8">
-    <!-- Newsletter Subscribe -->
-    <div class="flex flex-col items-center gap-3 text-center max-w-xs w-full">
-      <span
-        class="text-[10px] font-mono uppercase tracking-[0.3em] text-skin-base/40"
-        >Stay in the loop</span
-      >
-      <form
-        class="flex w-full gap-2"
-        id="footer-subscribe"
-      >
-        <input
-          type="email"
-          name="email"
-          placeholder="your@email.com"
-          required
-          class="flex-1 min-w-0 px-3 py-1.5 rounded-sm text-xs font-mono bg-skin-fill border border-skin-line/40 text-skin-base placeholder:text-skin-base/30 focus:outline-none focus:border-skin-accent transition-colors"
-        />
-        <button
-          type="submit"
-          class="px-3 py-1.5 rounded-sm text-[10px] font-mono uppercase tracking-wider text-skin-accent bg-skin-accent/10 hover:bg-skin-accent/20 backdrop-blur-sm transition-all whitespace-nowrap"
-          >Subscribe</button
-        >
-      </form>
-    </div>
-
-    <div class="w-16 h-[1px] bg-skin-line/10"></div>
-
-    <!-- Signature Block -->
-    <div class="flex flex-col items-center gap-2 text-center">
-      <span
-        class="text-xs font-mono uppercase tracking-[0.3em] text-skin-base/40"
-        >Yours Truly,</span
-      >
-      <span class="font-serif text-3xl italic text-skin-base tracking-tight"
-        >Arun Meti</span
-      >
-      <div class="w-16 h-[1px] bg-skin-line/20 mt-2"></div>
-    </div>
-
-    <!-- Social Links -->
-    <div class="opacity-60 hover:opacity-100 transition-opacity scale-90">
-      <Socials centered />
-    </div>
-
-    <!-- Footer Meta -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <!-- Desktop Side-by-Side / Mobile Stacked Grid -->
     <div
-      class="flex flex-col items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-skin-base/30"
+      class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-8 sm:gap-12 pb-8 border-b border-skin-line/15"
     >
+      <!-- Newsletter Subscribe (Left / Top) -->
+      <div class="flex flex-col items-center sm:items-start gap-2.5 text-center sm:text-left max-w-sm w-full">
+        <span
+          class="text-[10px] font-mono uppercase tracking-[0.25em] text-skin-base/40"
+          >Stay in the loop</span
+        >
+        <p class="text-xs text-skin-base/50 leading-relaxed hidden sm:block">
+          Occasional thoughts on technology, cinema, and systems.
+        </p>
+        <form
+          class="flex w-full gap-2 mt-1"
+          id="footer-subscribe"
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            class="flex-1 min-w-0 px-3.5 py-2 rounded-md text-xs font-mono bg-skin-fill border border-skin-line/40 text-skin-base placeholder:text-skin-base/30 focus:outline-none focus:border-skin-accent transition-colors"
+          />
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-md text-[10px] font-mono uppercase tracking-wider text-skin-accent bg-skin-accent/10 hover:bg-skin-accent/20 transition-all whitespace-nowrap"
+            >Subscribe</button
+          >
+        </form>
+      </div>
+
+      <!-- Divider for desktop -->
+      <div class="hidden sm:block w-px h-20 bg-skin-line/15"></div>
+
+      <!-- Signature Block (Right / Bottom) -->
+      <div class="flex flex-col items-center sm:items-end gap-1.5 text-center sm:text-right shrink-0">
+        <span
+          class="text-[10px] font-mono uppercase tracking-[0.25em] text-skin-base/40"
+          >Yours Truly,</span
+        >
+        <span class="font-serif text-3xl italic text-skin-base tracking-tight"
+          >Arun Meti</span
+        >
+        <div class="mt-2 opacity-70 hover:opacity-100 transition-opacity">
+          <Socials />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Meta -->
+    <div
+      class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] font-mono uppercase tracking-widest text-skin-base/30"
+    >
+      <span>Built with craft & intention</span>
       <a
         href={withBase("/humans.txt")}
         class="hover:text-skin-base transition-colors"
       >
-        &copy; {currentYear}
+        &copy; {currentYear} Arun Meti
       </a>
     </div>
   </div>

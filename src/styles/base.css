@@ -14,6 +14,7 @@
     --color-collection-tech: 59, 130, 246;
     --color-collection-cinema: 217, 119, 6;
     --color-collection-philosophy: 124, 58, 237;
+    --color-collection-book: 220, 105, 30;
     --color-collection-shelf: 16, 185, 129; /* Emerald 500 */
   }
 
@@ -27,6 +28,7 @@
     --color-collection-tech: 96, 165, 250;
     --color-collection-cinema: 251, 191, 36;
     --color-collection-philosophy: 167, 139, 250;
+    --color-collection-book: 251, 146, 60;
     --color-collection-shelf: 52, 211, 153; /* Emerald 400 */
   }
 

@@ -5,6 +5,7 @@ title: "Four Years at UVCE: Heritage, Late Nights, and Growing as an Engineer"
 slug: "four-years-at-uvce"
 tags: [uvce, college, engineering, career, personal-growth, tech]
 featured: true
+draft: true
 topic: tech
 description: "Reflections on my four-year journey through Computer Science and Engineering at University Visvesvaraya College of Engineering (UVCE) — the chaos, the community, the hackathons, and finding my craft."
 aliases:
