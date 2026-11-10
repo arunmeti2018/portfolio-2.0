@@ -11,6 +11,7 @@ import { withBase } from "@utils/base";
 import digitalClosetImg from "@assets/images/digital-closet.png";
 import disasterMgmtImg from "@assets/images/disaster-management.png";
 import snakeGameImg from "@assets/images/snake-game.png";
+import ScrollReveal from "@components/ScrollReveal";
 
 const projects = await getCollection("projects", ({ data }) => !data.draft);
 const sortedProjects = projects.sort((a, b) => {
@@ -29,30 +30,32 @@ const sortedProjects = projects.sort((a, b) => {
 
   <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6">
     {/* ===== HEADER ===== */}
-    <section class="w-full pt-24 sm:pt-20 pb-10">
-      <span
-        class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 mb-4 block"
-        >Things I've Built</span
-      >
-      <h1
-        class="font-serif text-3xl sm:text-4xl lg:text-5xl text-skin-base leading-tight mb-3"
-      >
-        Projects
-      </h1>
-      <p
-        class="text-sm sm:text-base text-skin-base/60 leading-relaxed max-w-2xl"
-      >
-        Web applications, systems, and open-source tools — from full-stack
-        platforms to real-time applications. Click on any project to explore
-        its architecture and implementation.
-      </p>
-    </section>
+    <ScrollReveal>
+      <section class="w-full pt-24 sm:pt-20 pb-10">
+        <span
+          class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 mb-4 block"
+          >Things I've Built</span
+        >
+        <h1
+          class="font-serif text-3xl sm:text-4xl lg:text-5xl text-skin-base leading-tight mb-3"
+        >
+          Projects
+        </h1>
+        <p
+          class="text-sm sm:text-base text-skin-base/60 leading-relaxed max-w-2xl"
+        >
+          Web applications, systems, and open-source tools — from full-stack
+          platforms to real-time applications. Click on any project to explore
+          its architecture and implementation.
+        </p>
+      </section>
+    </ScrollReveal>
 
     {/* ===== PROJECT LIST ===== */}
     <section class="w-full pb-16">
       <div class="flex flex-col gap-8">
         {
-          sortedProjects.map((project) => {
+          sortedProjects.map((project, idx) => {
             const slug = slugifyStr(project.data.title);
             const { title, description, techStack, liveLink, githubLink } =
               project.data;
@@ -68,7 +71,8 @@ const sortedProjects = projects.sort((a, b) => {
               thumbnailMap[title as keyof typeof thumbnailMap] || null;
 
             return (
-              <article class="group relative flex flex-col md:flex-row border border-skin-line/15 rounded-md hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/50 transition-all duration-300 hover:shadow-xl hover:shadow-skin-accent/5 overflow-hidden">
+              <ScrollReveal delay={idx * 0.08}>
+                <article class="group relative flex flex-col md:flex-row border border-skin-line/15 rounded-md hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/50 transition-all duration-300 hover:shadow-xl hover:shadow-skin-accent/5 overflow-hidden">
                   {/* Thumbnail area */}
                   <div class="w-full md:w-80 lg:w-96 shrink-0 aspect-[16/10] md:aspect-auto md:min-h-[220px] bg-skin-card-muted/40 border-b md:border-b-0 md:border-r border-skin-line/10 relative overflow-hidden flex items-center justify-center p-3 sm:p-4">
                     <a
@@ -158,6 +162,7 @@ const sortedProjects = projects.sort((a, b) => {
                     </div>
                   </div>
                 </article>
+              </ScrollReveal>
             );
           })
         }

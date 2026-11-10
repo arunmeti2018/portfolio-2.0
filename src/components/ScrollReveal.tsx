@@ -13,13 +13,28 @@ interface ScrollRevealProps {
 export default function ScrollReveal({
   children,
   width = "100%",
+  delay = 0,
+  direction = "up",
+  distance = 24,
   className = "",
   style = {},
 }: ScrollRevealProps) {
+  const customStyle: React.CSSProperties = {
+    width,
+    ...style,
+  };
+
   return (
     <div
-      className={`w-full relative ${className}`}
-      style={{ width, ...style }}
+      className={`reveal-on-scroll ${className}`}
+      data-direction={direction}
+      style={
+        {
+          ...customStyle,
+          "--reveal-delay": `${delay}s`,
+          "--reveal-distance": `${distance}px`,
+        } as React.CSSProperties
+      }
     >
       {children}
     </div>

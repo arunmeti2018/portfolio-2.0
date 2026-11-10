@@ -14,6 +14,7 @@ import {
 import HeroBackground from "@components/HeroBackground";
 import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
 import SpotlightCard from "@components/SpotlightCard";
+import ScrollReveal from "@components/ScrollReveal";
 import { getAllPosts, getPostUrl, getPostTopic } from "@utils/collections";
 import ShelfCard from "@components/ShelfCard.astro";
 import { getCollection } from "astro:content";
@@ -131,74 +132,83 @@ const featuredProjects = allProjects.slice(0, 3);
     {
       featuredPosts.length > 0 && (
         <section class="pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-skin-line/15">
-          <div class="flex items-end justify-between mb-6 border-b border-skin-line/20 pb-3">
-            <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 block mb-1">
-                Selected Writing
-              </span>
-              <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
-                Featured Posts
-              </h2>
+          <ScrollReveal>
+            <div class="flex items-end justify-between mb-6 border-b border-skin-line/20 pb-3">
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 block mb-1">
+                  Selected Writing
+                </span>
+                <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
+                  Featured Posts
+                </h2>
+              </div>
+              <a
+                href={withBase("/blog")}
+                class="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-skin-base/60 hover:text-skin-base transition-colors"
+              >
+                <span>All Posts</span>
+                <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+              </a>
             </div>
-            <a
-              href={withBase("/blog")}
-              class="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-skin-base/60 hover:text-skin-base transition-colors"
-            >
-              <span>All Posts</span>
-              <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
+          </ScrollReveal>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {featuredPosts.slice(0, 4).map((post) => (
-              <a
-                href={withBase(getPostUrl(post))}
-                class="group flex flex-col justify-between h-full p-5 sm:p-7 rounded-xl border border-skin-line/15 hover:border-skin-line/35 bg-skin-card/25 hover:bg-skin-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-skin-accent/5 overflow-hidden"
-              >
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span
-                      class="w-2 h-2 rounded-full"
-                      style={`background-color: rgb(var(--color-collection-${getPostTopic(post)}))`}
-                    />
-                    <span
-                      class="font-mono text-[10px] uppercase tracking-widest font-semibold"
-                      style={`color: rgb(var(--color-collection-${getPostTopic(post)}))`}
-                    >
-                      {getPostTopic(post)}
-                    </span>
-                    <span class="font-mono text-[10px] text-skin-base/40">
-                      {post.data.pubDatetime.toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "2-digit",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </div>
+            {featuredPosts.slice(0, 4).map((post, index) => (
+              <ScrollReveal delay={index * 0.08}>
+                <a
+                  href={withBase(getPostUrl(post))}
+                  class="group relative flex flex-col justify-between h-full p-5 sm:p-7 rounded-xl border border-skin-line/15 hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden"
+                >
+                  <div
+                    class="absolute top-0 left-0 right-0 h-[2px] opacity-30 group-hover:opacity-100 transition-opacity duration-300"
+                    style={`background: linear-gradient(90deg, transparent, rgb(var(--color-collection-${getPostTopic(post)})), transparent);`}
+                  />
 
-                  <h3 class="font-serif text-xl sm:text-2xl text-skin-base leading-snug mb-3 group-hover:text-skin-accent transition-colors duration-300">
-                    {post.data.title}
-                  </h3>
-
-                  <p class="text-sm text-skin-base/70 leading-relaxed line-clamp-3 mb-4">
-                    {post.data.description}
-                  </p>
-                </div>
-
-                <div class="pt-4 border-t border-skin-line/10 flex items-center justify-between gap-3">
-                  <div class="flex flex-wrap gap-1.5">
-                    {post.data.tags?.slice(0, 3).map((tag: string) => (
-                      <span class="px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded border border-skin-line/15 bg-skin-card-muted/60 text-skin-base/60">
-                        #{tag}
+                  <div>
+                    <div class="flex items-center gap-3 mb-3">
+                      <span
+                        class="w-2 h-2 rounded-full"
+                        style={`background-color: rgb(var(--color-collection-${getPostTopic(post)}))`}
+                      />
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-widest font-semibold"
+                        style={`color: rgb(var(--color-collection-${getPostTopic(post)}))`}
+                      >
+                        {getPostTopic(post)}
                       </span>
-                    ))}
+                      <span class="font-mono text-[10px] text-skin-base/40">
+                        {post.data.pubDatetime.toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "2-digit",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+
+                    <h3 class="font-serif text-xl sm:text-2xl text-skin-base leading-snug mb-3 group-hover:text-skin-accent transition-colors duration-300">
+                      {post.data.title}
+                    </h3>
+
+                    <p class="text-sm text-skin-base/70 leading-relaxed line-clamp-3 mb-4">
+                      {post.data.description}
+                    </p>
                   </div>
-                  <span class="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base/80 transition-colors shrink-0">
-                    <span>Read</span>
-                    <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </a>
+
+                  <div class="pt-4 border-t border-skin-line/10 flex items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5">
+                      {post.data.tags?.slice(0, 3).map((tag: string) => (
+                        <span class="px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded border border-skin-line/15 bg-skin-card-muted/60 text-skin-base/60">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span class="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base/90 transition-colors shrink-0">
+                      <span>Read</span>
+                      <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+                    </span>
+                  </div>
+                </a>
+              </ScrollReveal>
             ))}
           </div>
         </section>
@@ -209,26 +219,28 @@ const featuredProjects = allProjects.slice(0, 3);
     {
       featuredProjects.length > 0 && (
         <section class="pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-skin-line/15">
-          <div class="flex items-end justify-between mb-6 border-b border-skin-line/20 pb-3">
-            <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 block mb-1">
-                Selected Works
-              </span>
-              <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
-                Featured Projects
-              </h2>
+          <ScrollReveal>
+            <div class="flex items-end justify-between mb-6 border-b border-skin-line/20 pb-3">
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 block mb-1">
+                  Selected Works
+                </span>
+                <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
+                  Featured Projects
+                </h2>
+              </div>
+              <a
+                href={withBase("/projects")}
+                class="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-skin-base/60 hover:text-skin-base transition-colors"
+              >
+                <span>All Projects</span>
+                <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+              </a>
             </div>
-            <a
-              href={withBase("/projects")}
-              class="group inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-skin-base/60 hover:text-skin-base transition-colors"
-            >
-              <span>All Projects</span>
-              <TbArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
+          </ScrollReveal>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {featuredProjects.map((project) => {
+            {featuredProjects.map((project, idx) => {
               const slug = slugifyStr(project.data.title);
               const thumbnailMap = {
                 "Digital Closet": digitalClosetImg,
@@ -240,82 +252,84 @@ const featuredProjects = allProjects.slice(0, 3);
                 null;
 
               return (
-                <div class="group relative flex flex-col h-full border border-skin-line/15 rounded-xl hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg overflow-hidden">
-                  <a
-                    href={withBase(`/projects/${slug}/`)}
-                    class="block aspect-[16/10] overflow-hidden bg-skin-card-muted/40 border-b border-skin-line/10 relative"
-                  >
-                    {thumb ? (
-                      <img
-                        src={thumb.src}
-                        alt={project.data.title}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div class="w-full h-full flex items-center justify-center font-serif text-3xl text-skin-accent/30 font-bold">
-                        {project.data.title.charAt(0)}
-                      </div>
-                    )}
-                  </a>
-
-                  <div class="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-4">
-                    <div>
-                      <div class="flex items-start justify-between gap-2 mb-2">
-                        <a
-                          href={withBase(`/projects/${slug}/`)}
-                          class="group/title inline-block"
-                        >
-                          <h3 class="font-serif text-lg font-bold text-skin-base group-hover/title:text-skin-accent transition-colors leading-snug">
-                            {project.data.title}
-                          </h3>
-                        </a>
-                        <div class="flex items-center gap-1.5 shrink-0">
-                          {project.data.githubLink && (
-                            <a
-                              href={project.data.githubLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="p-1.5 rounded-md border border-skin-line/15 text-skin-base/50 hover:text-skin-base hover:border-skin-base/40 transition-all"
-                              aria-label={`${project.data.title} GitHub`}
-                            >
-                              <TbBrandGithub className="w-3.5 h-3.5" />
-                            </a>
-                          )}
-                          {project.data.liveLink && (
-                            <a
-                              href={project.data.liveLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="p-1.5 rounded-md border border-skin-line/15 text-skin-base/50 hover:text-skin-base hover:border-skin-base/40 transition-all"
-                              aria-label={`${project.data.title} Live`}
-                            >
-                              <TbExternalLink className="w-3.5 h-3.5" />
-                            </a>
-                          )}
+                <ScrollReveal delay={idx * 0.08}>
+                  <div class="group relative flex flex-col h-full border border-skin-line/15 rounded-xl hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden">
+                    <a
+                      href={withBase(`/projects/${slug}/`)}
+                      class="block aspect-[16/10] overflow-hidden bg-skin-card-muted/40 border-b border-skin-line/10 relative"
+                    >
+                      {thumb ? (
+                        <img
+                          src={thumb.src}
+                          alt={project.data.title}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="w-full h-full flex items-center justify-center font-serif text-3xl text-skin-accent/30 font-bold">
+                          {project.data.title.charAt(0)}
                         </div>
-                      </div>
-                      <p class="text-xs text-skin-base/70 leading-relaxed line-clamp-2">
-                        {project.data.description}
-                      </p>
-                    </div>
-
-                    <div class="pt-3 border-t border-skin-line/10 flex flex-wrap gap-1">
-                      {project.data.techStack
-                        .slice(0, 3)
-                        .map((tech: string) => (
-                          <span class="px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded border border-skin-line/15 bg-skin-card-muted/50 text-skin-base/60">
-                            {tech}
-                          </span>
-                        ))}
-                      {project.data.techStack.length > 3 && (
-                        <span class="px-1.5 py-0.5 text-[9px] font-mono text-skin-base/40">
-                          +{project.data.techStack.length - 3}
-                        </span>
                       )}
+                    </a>
+
+                    <div class="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-4">
+                      <div>
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                          <a
+                            href={withBase(`/projects/${slug}/`)}
+                            class="group/title inline-block"
+                          >
+                            <h3 class="font-serif text-lg font-bold text-skin-base group-hover/title:text-skin-accent transition-colors leading-snug">
+                              {project.data.title}
+                            </h3>
+                          </a>
+                          <div class="flex items-center gap-1.5 shrink-0">
+                            {project.data.githubLink && (
+                              <a
+                                href={project.data.githubLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="p-1.5 rounded-md border border-skin-line/15 text-skin-base/50 hover:text-skin-base hover:border-skin-base/40 transition-all"
+                                aria-label={`${project.data.title} GitHub`}
+                              >
+                                <TbBrandGithub className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                            {project.data.liveLink && (
+                              <a
+                                href={project.data.liveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="p-1.5 rounded-md border border-skin-line/15 text-skin-base/50 hover:text-skin-base hover:border-skin-base/40 transition-all"
+                                aria-label={`${project.data.title} Live`}
+                              >
+                                <TbExternalLink className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <p class="text-xs text-skin-base/70 leading-relaxed line-clamp-2">
+                          {project.data.description}
+                        </p>
+                      </div>
+
+                      <div class="pt-3 border-t border-skin-line/10 flex flex-wrap gap-1">
+                        {project.data.techStack
+                          .slice(0, 3)
+                          .map((tech: string) => (
+                            <span class="px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded border border-skin-line/15 bg-skin-card-muted/50 text-skin-base/60">
+                              {tech}
+                            </span>
+                          ))}
+                        {project.data.techStack.length > 3 && (
+                          <span class="px-1.5 py-0.5 text-[9px] font-mono text-skin-base/40">
+                            +{project.data.techStack.length - 3}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -328,54 +342,63 @@ const featuredProjects = allProjects.slice(0, 3);
       class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 border-b border-skin-line/15 pt-8 pb-10 sm:pt-10 sm:pb-12"
     >
       <div class="lg:col-span-7 corner-brackets relative">
-        <div
-          class="flex items-center justify-between mb-8 border-b border-skin-line/20 pb-3"
-        >
-          <span
-            class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40"
-            >Recent Thoughts</span
+        <ScrollReveal>
+          <div
+            class="flex items-center justify-between mb-8 border-b border-skin-line/20 pb-3"
           >
-          <a
-            href={withBase("/blog/")}
-            class="group inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-skin-base/50 hover:text-skin-base transition-colors"
-          >
-            All Posts <TbArrowRight
-              className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
-            />
-          </a>
-        </div>
+            <span
+              class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40"
+              >Recent Thoughts</span
+            >
+            <a
+              href={withBase("/blog/")}
+              class="group inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-skin-base/50 hover:text-skin-base transition-colors"
+            >
+              All Posts <TbArrowRight
+                className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform"
+              />
+            </a>
+          </div>
+        </ScrollReveal>
 
-        <ul class="space-y-6">
+        <ul class="space-y-4 sm:space-y-5">
           {
-            recentPosts.slice(0, 4).map((post) => (
+            recentPosts.slice(0, 4).map((post, index) => (
               <li class="block">
-                <a
-                  href={withBase(getPostUrl(post))}
-                  class="group block p-4 rounded-md border border-skin-line/10 hover:border-skin-line/30 hover:bg-skin-card/20 transition-all duration-300"
-                >
-                  <div class="flex items-center gap-3 mb-1.5">
-                    <span
-                      class="w-1.5 h-1.5 rounded-full"
-                      style={`background-color: rgb(var(--color-collection-${getPostTopic(post)}))`}
-                    />
-                    <span
-                      class="font-mono text-[10px] uppercase tracking-widest"
-                      style={`color: rgb(var(--color-collection-${getPostTopic(post)}))`}
-                    >
-                      {getPostTopic(post)}
-                    </span>
-                    <span class="font-mono text-[10px] text-skin-base/40 group-hover:text-skin-base transition-colors">
-                      {post.data.pubDatetime.toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "2-digit",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </div>
-                  <h4 class="font-serif text-xl sm:text-2xl text-skin-base group-hover:text-skin-accent transition-colors">
-                    {post.data.title}
-                  </h4>
-                </a>
+                <ScrollReveal delay={index * 0.08}>
+                  <a
+                    href={withBase(getPostUrl(post))}
+                    class="group block p-4 sm:p-5 rounded-xl border border-skin-line/10 hover:border-skin-line/30 bg-skin-card/15 hover:bg-skin-card/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    <div class="flex items-center gap-3 mb-2">
+                      <span
+                        class="w-1.5 h-1.5 rounded-full"
+                        style={`background-color: rgb(var(--color-collection-${getPostTopic(post)}))`}
+                      />
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-widest font-semibold"
+                        style={`color: rgb(var(--color-collection-${getPostTopic(post)}))`}
+                      >
+                        {getPostTopic(post)}
+                      </span>
+                      <span class="font-mono text-[10px] text-skin-base/40 group-hover:text-skin-base transition-colors">
+                        {post.data.pubDatetime.toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "2-digit",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                    <h4 class="font-serif text-lg sm:text-xl text-skin-base group-hover:text-skin-accent transition-colors leading-snug mb-1.5">
+                      {post.data.title}
+                    </h4>
+                    {post.data.description && (
+                      <p class="text-xs text-skin-base/60 leading-relaxed line-clamp-2">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </a>
+                </ScrollReveal>
               </li>
             ))
           }
@@ -383,90 +406,96 @@ const featuredProjects = allProjects.slice(0, 3);
       </div>
 
       <div class="lg:col-span-5">
-        <SpotlightCard
-          client:visible
-          className="flex flex-col justify-between bg-skin-card-muted/25 p-7 sm:p-8 rounded-md border border-skin-line/15 h-full backdrop-blur-sm"
-        >
-          <div>
-            <div
-              class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-skin-line/20 bg-skin-fill/60 text-[10px] font-mono uppercase tracking-widest text-skin-base/70 mb-4"
-            >
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
-              ></span>
-              <span>Open for collaboration</span>
-            </div>
-            <h3 class="font-serif text-3xl mb-3 text-skin-base">
-              Get in Touch
-            </h3>
-            <p class="text-sm font-normal text-skin-base/75 leading-relaxed">
-              Have a question, an opportunity, or want to discuss systems
-              architecture? Feel free to reach out directly.
-            </p>
-          </div>
-
-          <div class="flex flex-col gap-3 mt-10">
-            <LinkButton
-              href={withBase("/resume")}
-              className="flex items-center justify-between w-full px-5 py-3.5 border border-skin-line/40 hover:bg-skin-inverted hover:text-skin-inverted hover:border-skin-inverted transition-all duration-300 rounded-sm group"
-            >
-              <span class="text-xs font-mono uppercase tracking-widest"
-                >View Resume</span
+        <ScrollReveal delay={0.2}>
+          <SpotlightCard
+            client:visible
+            className="flex flex-col justify-between bg-skin-card-muted/25 p-7 sm:p-8 rounded-xl border border-skin-line/15 h-full backdrop-blur-sm"
+          >
+            <div>
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-skin-line/20 bg-skin-fill/60 text-[10px] font-mono uppercase tracking-widest text-skin-base/70 mb-4"
               >
-              <TbArrowDown
-                className="w-4 h-4 group-hover:translate-y-1 transition-transform"
-              />
-            </LinkButton>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+                ></span>
+                <span>Open for collaboration</span>
+              </div>
+              <h3 class="font-serif text-3xl mb-3 text-skin-base">
+                Get in Touch
+              </h3>
+              <p class="text-sm font-normal text-skin-base/75 leading-relaxed">
+                Have a question, an opportunity, or want to discuss systems
+                architecture? Feel free to reach out directly.
+              </p>
+            </div>
 
-            <a
-              href="mailto:arunameti2024@gmail.com"
-              class="flex items-center justify-center gap-2 px-5 py-3 border border-skin-line/20 hover:border-skin-base/40 text-xs font-mono uppercase tracking-widest text-skin-base/70 hover:text-skin-base rounded-sm transition-all"
-            >
-              arunameti2024@gmail.com
-            </a>
-          </div>
-        </SpotlightCard>
+            <div class="flex flex-col gap-3 mt-10">
+              <LinkButton
+                href={withBase("/resume")}
+                className="flex items-center justify-between w-full px-5 py-3.5 border border-skin-line/40 hover:bg-skin-inverted hover:text-skin-inverted hover:border-skin-inverted transition-all duration-300 rounded-sm group"
+              >
+                <span class="text-xs font-mono uppercase tracking-widest"
+                  >View Resume</span
+                >
+                <TbArrowDown
+                  className="w-4 h-4 group-hover:translate-y-1 transition-transform"
+                />
+              </LinkButton>
+
+              <a
+                href="mailto:arunameti2024@gmail.com"
+                class="flex items-center justify-center gap-2 px-5 py-3 border border-skin-line/20 hover:border-skin-base/40 text-xs font-mono uppercase tracking-widest text-skin-base/70 hover:text-skin-base rounded-sm transition-all"
+              >
+                arunameti2024@gmail.com
+              </a>
+            </div>
+          </SpotlightCard>
+        </ScrollReveal>
       </div>
     </section>
 
     {/* ===== 4. THE SHELF ===== */}
     <section class="py-14 sm:py-16">
-      <div class="flex items-end justify-between mb-8">
-        <div>
-          <span
-            class="font-mono text-[10px] uppercase tracking-widest text-skin-base/35 block mb-1"
-            >Currently exploring</span
+      <ScrollReveal>
+        <div class="flex items-end justify-between mb-8">
+          <div>
+            <span
+              class="font-mono text-[10px] uppercase tracking-widest text-skin-base/35 block mb-1"
+              >Currently exploring</span
+            >
+            <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
+              The Shelf
+            </h2>
+          </div>
+          <a
+            href={withBase("/shelf/")}
+            class="font-mono text-[10px] uppercase tracking-widest text-skin-base/50 hover:text-skin-base transition-colors"
+            >View all →</a
           >
-          <h2 class="font-serif text-2xl sm:text-3xl text-skin-base">
-            The Shelf
-          </h2>
         </div>
-        <a
-          href={withBase("/shelf/")}
-          class="font-mono text-[10px] uppercase tracking-widest text-skin-base/50 hover:text-skin-base transition-colors"
-          >View all →</a
-        >
-      </div>
+      </ScrollReveal>
 
-      <div
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-5"
-      >
-        {
-          shelfDone.map((item) => (
-            <ShelfCard
-              type={item.data.type}
-              title={item.data.title}
-              creator={item.data.creator}
-              genre={item.data.genre}
-              status={item.data.status}
-              rating={item.data.rating}
-              year={item.data.year}
-              poster={item.data.poster}
-              compact={true}
-              href={withBase(`/shelf/${stripExt(item.id)}/`)}
-            />
-          ))
-        }
-      </div>
+      <ScrollReveal delay={0.1}>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-5"
+        >
+          {
+            shelfDone.map((item) => (
+              <ShelfCard
+                type={item.data.type}
+                title={item.data.title}
+                creator={item.data.creator}
+                genre={item.data.genre}
+                status={item.data.status}
+                rating={item.data.rating}
+                year={item.data.year}
+                poster={item.data.poster}
+                compact={true}
+                href={withBase(`/shelf/${stripExt(item.id)}/`)}
+              />
+            ))
+          }
+        </div>
+      </ScrollReveal>
     </section>
   </main>
   <ClimbingBackToTop />

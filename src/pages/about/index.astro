@@ -6,6 +6,7 @@ import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
 import { SITE } from "@config";
 import { withBase } from "@utils/base";
 import { TbArrowRight, TbCode, TbMovie, TbBrain } from "react-icons/tb";
+import ScrollReveal from "@components/ScrollReveal";
 ---
 
 <Layout
@@ -17,9 +18,10 @@ import { TbArrowRight, TbCode, TbMovie, TbBrain } from "react-icons/tb";
 
   <main id="main-content" class="max-w-5xl mx-auto px-3 sm:px-6 pt-20 sm:pt-28 pb-16">
     {/* ===== HERO PROFILE CARD ===== */}
-    <section
-      class="relative border border-skin-line/15 rounded-2xl p-4 sm:p-8 lg:p-10 bg-skin-card/40 backdrop-blur-md shadow-sm overflow-hidden"
-    >
+    <ScrollReveal>
+      <section
+        class="relative border border-skin-line/15 rounded-2xl p-4 sm:p-8 lg:p-10 bg-skin-card/40 backdrop-blur-md shadow-sm overflow-hidden"
+      >
       {/* Decorative subtle ambient glow */}
       <div
         class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-skin-accent/5 blur-3xl pointer-events-none"
@@ -108,13 +110,16 @@ import { TbArrowRight, TbCode, TbMovie, TbBrain } from "react-icons/tb";
         </div>
       </div>
     </section>
+    </ScrollReveal>
 
     {/* ===== INTERESTS & CURATIONS ===== */}
     <section class="w-full mt-12 sm:mt-16">
-      <div class="flex items-baseline justify-between mb-5">
-        <h2 class="font-serif text-xl sm:text-2xl text-skin-base">What I Care About</h2>
-        <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40">Explorations</span>
-      </div>
+      <ScrollReveal>
+        <div class="flex items-baseline justify-between mb-5">
+          <h2 class="font-serif text-xl sm:text-2xl text-skin-base">What I Care About</h2>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40">Explorations</span>
+        </div>
+      </ScrollReveal>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Tech Card */}

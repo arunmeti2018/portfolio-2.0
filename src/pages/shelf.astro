@@ -14,6 +14,7 @@ import {
 } from "@utils/shelf";
 import { withBase } from "@utils/base";
 import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
+import ScrollReveal from "@components/ScrollReveal";
 
 const allItems = await getCollection("shelf");
 const statusOrder: ShelfStatus[] = ["in-progress", "done", "wishlist"];
@@ -115,50 +116,52 @@ const sections = typeOrder
     class="mx-auto w-full max-w-6xl px-3 sm:px-6 pb-20 pt-4"
   >
     {
-      sections.map((section) => (
-        <section
-          class="shelf-section mb-14 last:mb-0"
-          id={`section-${section.key}`}
-          data-section={section.key}
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <span
-              class="w-5 h-5 select-none text-skin-accent/60 shelf-icon"
-              set:html={section.icon}
-            />
-            <div class="flex-1 min-w-0">
-              <div class="flex items-baseline gap-3">
-                <h2 class="font-mono text-xs uppercase tracking-widest font-medium text-skin-base/80">
-                  {section.label}
-                </h2>
-                <span class="shelf-section-count font-mono text-[10px] text-skin-base/25">
-                  {section.items.length}
-                </span>
+      sections.map((section, idx) => (
+        <ScrollReveal delay={idx * 0.05}>
+          <section
+            class="shelf-section mb-14 last:mb-0"
+            id={`section-${section.key}`}
+            data-section={section.key}
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <span
+                class="w-5 h-5 select-none text-skin-accent/60 shelf-icon"
+                set:html={section.icon}
+              />
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-3">
+                  <h2 class="font-mono text-xs uppercase tracking-widest font-medium text-skin-base/80">
+                    {section.label}
+                  </h2>
+                  <span class="shelf-section-count font-mono text-[10px] text-skin-base/25">
+                    {section.items.length}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8">
-            {section.items.map((item) => (
-              <ShelfCard
-                type={item.data.type}
-                title={item.data.title}
-                creator={item.data.creator}
-                genre={item.data.genre}
-                status={item.data.status}
-                rating={item.data.rating}
-                year={item.data.year}
-                description={item.data.description}
-                poster={item.data.poster}
-                href={withBase(`/shelf/${stripExt(item.id)}/`)}
-              />
-            ))}
-          </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8">
+              {section.items.map((item) => (
+                <ShelfCard
+                  type={item.data.type}
+                  title={item.data.title}
+                  creator={item.data.creator}
+                  genre={item.data.genre}
+                  status={item.data.status}
+                  rating={item.data.rating}
+                  year={item.data.year}
+                  description={item.data.description}
+                  poster={item.data.poster}
+                  href={withBase(`/shelf/${stripExt(item.id)}/`)}
+                />
+              ))}
+            </div>
 
-          {section.key !== sections[sections.length - 1].key && (
-            <div class="mt-14 border-b border-skin-line/8" />
-          )}
-        </section>
+            {section.key !== sections[sections.length - 1].key && (
+              <div class="mt-14 border-b border-skin-line/8" />
+            )}
+          </section>
+        </ScrollReveal>
       ))
     }
   </main>

@@ -250,3 +250,39 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* ============================================================
+   SMOOTH SCROLL REVEAL SYSTEM (Zero hydration overhead, 100% fail-safe)
+   ============================================================ */
+.reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready .reveal-on-scroll:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 24px));
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+    will-change: opacity, transform;
+  }
+
+  html.reveal-ready .reveal-on-scroll[data-direction="left"]:not(.is-revealed) {
+    transform: translateX(var(--reveal-distance, 24px));
+  }
+
+  html.reveal-ready .reveal-on-scroll[data-direction="right"]:not(.is-revealed) {
+    transform: translateX(calc(-1 * var(--reveal-distance, 24px)));
+  }
+
+  html.reveal-ready .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+}
+

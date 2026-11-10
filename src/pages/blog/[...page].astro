@@ -8,6 +8,7 @@ import { SITE } from "@config";
 import { getAllPosts, COLLECTION_META, getPostUrl, getPostTopic } from "@utils/collections";
 import getSortedPosts from "@utils/getSortedPosts";
 import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
+import ScrollReveal from "@components/ScrollReveal";
 import { withBase } from "@utils/base";
 import { getPublications } from "@utils/bibtexUtils";
 import {
@@ -107,16 +108,20 @@ const getRelatedPubs = (tags: string[]) => {
           const collection = isShelf
             ? item.topic
             : getPostTopic(item);
-          return isShelf ? (
-            <ShelfListCard item={item} href={href} />
-          ) : (
-            <Card
-              href={href}
-              frontmatter={item.data}
-              index={index + 1}
-              relatedPublications={getRelatedPubs(item.data.tags)}
-              collection={collection}
-            />
+          return (
+            <ScrollReveal delay={Math.min(index * 0.05, 0.35)}>
+              {isShelf ? (
+                <ShelfListCard item={item} href={href} />
+              ) : (
+                <Card
+                  href={href}
+                  frontmatter={item.data}
+                  index={index + 1}
+                  relatedPublications={getRelatedPubs(item.data.tags)}
+                  collection={collection}
+                />
+              )}
+            </ScrollReveal>
           );
         })
       }
