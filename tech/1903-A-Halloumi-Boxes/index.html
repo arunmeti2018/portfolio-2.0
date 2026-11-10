@@ -54,7 +54,7 @@
             reflectPreference(themeValue);
           }
         });
-    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><link rel="stylesheet" href="/_astro/index.DF0IUrpR.css">
+    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><link rel="stylesheet" href="/_astro/index.2TEQzHR7.css">
 <style>a:where(.astro-blwjyjpt){position:relative;text-decoration-line:underline;text-decoration-style:dashed}a:where(.astro-blwjyjpt):hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity, 1))}a:where(.astro-blwjyjpt):focus-visible{padding:.25rem}a:where(.astro-blwjyjpt) svg:where(.astro-blwjyjpt){margin-right:-.25rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity, 1));opacity:.8}.group:where(.astro-blwjyjpt):hover a:where(.astro-blwjyjpt) svg:where(.astro-blwjyjpt){--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity, 1))}
 .giscus-wrapper:where(.astro-an2nl7ar){margin-top:3rem;padding-top:2rem;border-top:1px solid rgb(var(--color-border) / .3)}.comments-coming-soon:where(.astro-an2nl7ar){display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;padding:2rem;text-align:center;border-radius:.5rem;background-color:rgb(var(--color-card) / .5)}.comments-icon:where(.astro-an2nl7ar){font-size:1.5rem;opacity:.6;margin-bottom:.5rem}.comments-message:where(.astro-an2nl7ar){font-size:.95rem;font-weight:500;color:rgb(var(--color-text-base))}.comments-subtext:where(.astro-an2nl7ar){font-size:.8rem;color:rgb(var(--color-text-base) / .6);margin-top:.25rem}.scrollbar-thin:where(.astro-xlvzfuxv)::-webkit-scrollbar{height:4px}.scrollbar-thin:where(.astro-xlvzfuxv)::-webkit-scrollbar-thumb{border-radius:9999px;background-color:rgba(var(--color-accent),.5)}.tab-panel:where(.astro-r7gez2uh)>:first-child{margin-top:0!important}.tab-panel:where(.astro-r7gez2uh)>:last-child{margin-bottom:0!important}.tab-panel:where(.astro-r7gez2uh) pre{margin:0!important;border:none!important;border-radius:0!important;background-color:transparent!important}.tab-panel:where(.astro-r7gez2uh) .code-wrapper{margin:0!important}
 @keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
@@ -481,6 +481,58 @@ Occasional thoughts on technology, cinema, and systems.
         document.addEventListener("astro:page-load", function () {
           bar = document.getElementById("nav-progress");
         });
+      })();
+    </script> <!-- Smooth Hardware-Accelerated Scroll Reveal Observer --> <script>
+      (function () {
+        function initScrollReveal() {
+          document.documentElement.classList.add("reveal-ready");
+          var reveals = document.querySelectorAll(
+            ".reveal-on-scroll:not(.is-revealed)"
+          );
+          if (!reveals.length) return;
+
+          if (!("IntersectionObserver" in window)) {
+            reveals.forEach(function (el) {
+              el.classList.add("is-revealed");
+            });
+            return;
+          }
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-revealed");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px 40px 0px", threshold: 0.05 }
+          );
+
+          reveals.forEach(function (el) {
+            observer.observe(el);
+          });
+
+          // Ultimate fail-safe: Ensure any element on screen or near viewport is revealed
+          setTimeout(function () {
+            document
+              .querySelectorAll(".reveal-on-scroll:not(.is-revealed)")
+              .forEach(function (el) {
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight + 250) {
+                  el.classList.add("is-revealed");
+                }
+              });
+          }, 900);
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initScrollReveal);
+        } else {
+          initScrollReveal();
+        }
+        document.addEventListener("astro:page-load", initScrollReveal);
       })();
     </script> </body> </html>  <script data-astro-rerun>
   /** Create a progress indicator

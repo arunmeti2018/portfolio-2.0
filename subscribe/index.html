@@ -54,7 +54,7 @@
             reflectPreference(themeValue);
           }
         });
-    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><link rel="stylesheet" href="/_astro/index.DF0IUrpR.css"></head> <body class="selection:bg-skin-accent selection:text-white"> <div id="nav-progress" class="fixed top-0 left-0 h-[2px] z-[9999] pointer-events-none" style="width: 0%; background: rgba(var(--color-accent), 1); transition: none; opacity: 0;"></div> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMG7M2PS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>  <!-- 
+    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><link rel="stylesheet" href="/_astro/index.2TEQzHR7.css"></head> <body class="selection:bg-skin-accent selection:text-white"> <div id="nav-progress" class="fixed top-0 left-0 h-[2px] z-[9999] pointer-events-none" style="width: 0%; background: rgba(var(--color-accent), 1); transition: none; opacity: 0;"></div> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMG7M2PS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>  <!-- 
   PREMIUM NAVIGATION SYSTEM
   Desktop: Top Floating Pill (Unchanged)
   Mobile: Double-Decker Technical Console (Solves navigability & density)
@@ -131,5 +131,57 @@ Occasional thoughts on technology, cinema, and systems.
         document.addEventListener("astro:page-load", function () {
           bar = document.getElementById("nav-progress");
         });
+      })();
+    </script> <!-- Smooth Hardware-Accelerated Scroll Reveal Observer --> <script>
+      (function () {
+        function initScrollReveal() {
+          document.documentElement.classList.add("reveal-ready");
+          var reveals = document.querySelectorAll(
+            ".reveal-on-scroll:not(.is-revealed)"
+          );
+          if (!reveals.length) return;
+
+          if (!("IntersectionObserver" in window)) {
+            reveals.forEach(function (el) {
+              el.classList.add("is-revealed");
+            });
+            return;
+          }
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-revealed");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px 40px 0px", threshold: 0.05 }
+          );
+
+          reveals.forEach(function (el) {
+            observer.observe(el);
+          });
+
+          // Ultimate fail-safe: Ensure any element on screen or near viewport is revealed
+          setTimeout(function () {
+            document
+              .querySelectorAll(".reveal-on-scroll:not(.is-revealed)")
+              .forEach(function (el) {
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight + 250) {
+                  el.classList.add("is-revealed");
+                }
+              });
+          }, 900);
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initScrollReveal);
+        } else {
+          initScrollReveal();
+        }
+        document.addEventListener("astro:page-load", initScrollReveal);
       })();
     </script> </body> </html> <script type="module">function n(){const e=document.getElementById("subscribe-form");!e||e.dataset.bound||(e.dataset.bound="1",e.addEventListener("submit",a=>{a.preventDefault();const t=new FormData(e).get("email");t&&window.open(`https://arunmeti.substack.com/subscribe?freeSignupEmail=${encodeURIComponent(t)}`,"_blank","noopener")}))}n();document.addEventListener("astro:after-swap",n);</script>
