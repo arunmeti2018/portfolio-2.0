@@ -48,46 +48,43 @@ const featuredProjects = allProjects.slice(0, 3);
   <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     {/* ===== HERO ===== */}
     <section
-      class="min-h-[75svh] flex flex-col justify-center relative border-x border-skin-line/10 mt-20 sm:mt-8 mb-6 overflow-hidden rounded-sm"
+      class="min-h-[65svh] sm:min-h-[75svh] flex flex-col justify-center relative border border-skin-line/15 mt-20 sm:mt-10 mb-8 sm:mb-10 overflow-hidden rounded-2xl bg-skin-card/20"
     >
       <div class="absolute inset-0 -z-10 bg-skin-fill/50">
         <HeroBackground client:load />
       </div>
 
       <div
-        class="absolute top-0 left-0 w-8 h-8 border-t border-l border-skin-text-base/30"
+        class="hidden sm:block absolute top-0 left-0 w-8 h-8 border-t border-l border-skin-text-base/30"
       >
       </div>
       <div
-        class="absolute top-0 right-0 w-8 h-8 border-t border-r border-skin-text-base/30"
+        class="hidden sm:block absolute top-0 right-0 w-8 h-8 border-t border-r border-skin-text-base/30"
       >
       </div>
       <div
-        class="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-skin-text-base/30"
+        class="hidden sm:block absolute bottom-0 left-0 w-8 h-8 border-b border-l border-skin-text-base/30"
       >
       </div>
       <div
-        class="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-skin-text-base/30"
+        class="hidden sm:block absolute bottom-0 right-0 w-8 h-8 border-b border-r border-skin-text-base/30"
       >
       </div>
 
       <div
-        class="absolute top-0 left-0 w-full flex justify-between items-start p-6 font-mono text-[10px] uppercase tracking-widest text-skin-base/50"
+        class="hidden sm:flex absolute top-0 left-0 w-full justify-between items-start p-6 font-mono text-[10px] uppercase tracking-widest text-skin-base/40 pointer-events-none"
       >
-        <div class="flex flex-col gap-1">
-          <span>Building things that work</span>
-        </div>
-        <div class="text-right flex flex-col gap-1">
-          <span>Available for collaboration</span>
-        </div>
+        <span>Building things that work</span>
+        <span>Available for collaboration</span>
       </div>
 
       <div
-        class="relative z-10 w-full max-w-4xl mx-auto px-6 py-16 sm:py-20 flex flex-col items-center text-center"
+        class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20 flex flex-col items-center text-center"
       >
         <div
-          class="inline-flex items-center gap-3 px-3 py-1 border border-skin-line/30 rounded-full bg-skin-fill/80 backdrop-blur-sm mb-8"
+          class="inline-flex items-center gap-2 px-3 py-1 border border-skin-line/25 rounded-full bg-skin-fill/80 backdrop-blur-sm mb-6 sm:mb-8"
         >
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           <span
             class="font-mono text-[10px] uppercase tracking-widest text-skin-base/70"
             >Human who actually thinks!</span
@@ -95,12 +92,10 @@ const featuredProjects = allProjects.slice(0, 3);
         </div>
 
         <h1
-          class="flex flex-col items-center justify-center font-serif text-6xl sm:text-8xl lg:text-9xl leading-[0.85] text-skin-base tracking-tighter"
+          class="flex flex-col items-center justify-center font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.88] text-skin-base tracking-tighter"
         >
           <span class="relative">
             ARUN
-            <span class="absolute top-1/2 left-0 w-full h-[1px] bg-skin-line/0"
-            ></span>
           </span>
           <span
             class="text-skin-base/20 font-sans font-bold tracking-tight italic"
@@ -111,22 +106,22 @@ const featuredProjects = allProjects.slice(0, 3);
         </h1>
 
         <p
-          class="mt-8 max-w-xl text-sm sm:text-base font-normal leading-relaxed text-skin-base/90 bg-skin-fill/60 backdrop-blur-sm p-4 border border-skin-line/10 rounded-sm"
+          class="mt-6 sm:mt-8 max-w-xl text-sm sm:text-base font-normal leading-relaxed text-skin-base/85 bg-skin-fill/70 backdrop-blur-md p-4 sm:p-5 border border-skin-line/15 rounded-xl text-center sm:text-left"
         >
           Engineer by day, explorer by default. Currently figuring out what's next —
           one iconic thing at a time. Certified cinephile.
         </p>
 
-        <div class="mt-8 flex flex-col sm:flex-row items-center gap-6">
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
           <LinkButton
             href={withBase("/projects")}
-            className="px-8 py-3 bg-skin-inverted text-skin-inverted hover:bg-skin-accent hover:text-skin-inverted transition-colors font-mono text-xs uppercase tracking-widest rounded-sm"
+            className="w-full sm:w-auto px-8 py-3 bg-skin-inverted text-skin-inverted hover:bg-skin-accent hover:text-skin-inverted transition-colors font-mono text-xs uppercase tracking-widest rounded-lg text-center justify-center shadow-sm"
           >
             View Projects
           </LinkButton>
 
           <div class="h-[1px] w-12 bg-skin-line/30 hidden sm:block"></div>
-          <div class="scale-90 opacity-70 hover:opacity-100 transition-opacity">
+          <div class="opacity-75 hover:opacity-100 transition-opacity">
             <Socials />
           </div>
         </div>
@@ -157,12 +152,12 @@ const featuredProjects = allProjects.slice(0, 3);
             </div>
           </ScrollReveal>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {featuredPosts.slice(0, 4).map((post, index) => (
               <ScrollReveal client:visible delay={index * 0.08}>
                 <a
                   href={withBase(getPostUrl(post))}
-                  class="group flex flex-col justify-between h-full p-6 sm:p-7 rounded-md border border-skin-line/15 hover:border-skin-line/35 bg-skin-card/25 hover:bg-skin-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-skin-accent/5 overflow-hidden"
+                  class="group flex flex-col justify-between h-full p-5 sm:p-7 rounded-xl border border-skin-line/15 hover:border-skin-line/35 bg-skin-card/25 hover:bg-skin-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-skin-accent/5 overflow-hidden"
                 >
                   <div>
                     <div class="flex items-center gap-3 mb-3">
@@ -253,7 +248,7 @@ const featuredProjects = allProjects.slice(0, 3);
 
               return (
                 <ScrollReveal client:visible delay={idx * 0.08}>
-                  <div class="group relative flex flex-col h-full border border-skin-line/15 rounded-md hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg overflow-hidden">
+                  <div class="group relative flex flex-col h-full border border-skin-line/15 rounded-xl hover:border-skin-line/40 bg-skin-card/25 hover:bg-skin-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg overflow-hidden">
                     <a
                       href={withBase(`/projects/${slug}/`)}
                       class="block aspect-[16/10] overflow-hidden bg-skin-card-muted/40 border-b border-skin-line/10 relative"
@@ -262,7 +257,7 @@ const featuredProjects = allProjects.slice(0, 3);
                         <img
                           src={thumb.src}
                           alt={project.data.title}
-                          class="w-full h-full object-cover rounded transition-transform duration-500 group-hover:scale-105"
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
                         />
                       ) : (
@@ -272,7 +267,7 @@ const featuredProjects = allProjects.slice(0, 3);
                       )}
                     </a>
 
-                    <div class="p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div class="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-4">
                       <div>
                         <div class="flex items-start justify-between gap-2 mb-2">
                           <a
@@ -471,23 +466,22 @@ const featuredProjects = allProjects.slice(0, 3);
 
       <ScrollReveal client:visible delay={0.1}>
         <div
-          class="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-6 md:overflow-visible md:pb-0"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-5"
         >
           {
             shelfDone.map((item) => (
-              <div class="shrink-0 w-[130px] snap-start md:w-auto md:shrink">
-                <ShelfCard
-                  type={item.data.type}
-                  title={item.data.title}
-                  creator={item.data.creator}
-                  genre={item.data.genre}
-                  status={item.data.status}
-                  rating={item.data.rating}
-                  poster={item.data.poster}
-                  compact
-                  href={withBase(`/shelf/${stripExt(item.id)}/`)}
-                />
-              </div>
+              <ShelfCard
+                type={item.data.type}
+                title={item.data.title}
+                creator={item.data.creator}
+                genre={item.data.genre}
+                status={item.data.status}
+                rating={item.data.rating}
+                year={item.data.year}
+                poster={item.data.poster}
+                compact={true}
+                href={withBase(`/shelf/${stripExt(item.id)}/`)}
+              />
             ))
           }
         </div>

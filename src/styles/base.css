@@ -83,7 +83,15 @@
     display: block;
   }
 
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
+    overflow-x: hidden;
+    width: 100%;
     @apply flex min-h-[100svh] flex-col bg-skin-fill font-sans text-skin-base selection:bg-skin-inverted selection:text-skin-inverted relative;
   }
 
@@ -187,7 +195,7 @@
   /* BLUEPRINT CORNER MARKERS */
   /* Creates subtle L-brackets at the corners of an element */
   .corner-brackets {
-    @apply relative p-6;
+    @apply relative p-3 sm:p-6;
   }
   .corner-brackets::before,
   .corner-brackets::after {

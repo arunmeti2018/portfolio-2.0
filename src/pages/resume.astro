@@ -129,23 +129,22 @@ const shelfItems = shelfRaw
             >
           </div>
           <div
-            class="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide"
+            class="grid grid-cols-2 sm:grid-cols-3 gap-3.5"
           >
             {
-              shelfItems.map((item) => (
-                <div class="shrink-0 w-[120px] snap-start">
-                  <ShelfCard
-                    type={item.data.type}
-                    title={item.data.title}
-                    creator={item.data.creator}
-                    genre={item.data.genre}
-                    status={item.data.status}
-                    rating={item.data.rating}
-                    poster={item.data.poster}
-                    compact={true}
-                    href={withBase(`/shelf/${stripExt(item.id)}/`)}
-                  />
-                </div>
+              shelfItems.slice(0, 4).map((item) => (
+                <ShelfCard
+                  type={item.data.type}
+                  title={item.data.title}
+                  creator={item.data.creator}
+                  genre={item.data.genre}
+                  status={item.data.status}
+                  rating={item.data.rating}
+                  year={item.data.year}
+                  poster={item.data.poster}
+                  compact={true}
+                  href={withBase(`/shelf/${stripExt(item.id)}/`)}
+                />
               ))
             }
           </div>
