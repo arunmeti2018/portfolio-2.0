@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -7,46 +6,22 @@ interface ScrollRevealProps {
   delay?: number;
   direction?: "up" | "down" | "left" | "right";
   distance?: number;
-  className?: string; // Added className
-  style?: React.CSSProperties; // Added style
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export default function ScrollReveal({
   children,
   width = "100%",
-  delay = 0,
-  direction = "up",
-  distance = 30,
   className = "",
   style = {},
 }: ScrollRevealProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.05 });
-
-  const variants = {
-    hidden: {
-      opacity: 0,
-      y: direction === "up" ? distance : direction === "down" ? -distance : 0,
-      x:
-        direction === "left" ? distance : direction === "right" ? -distance : 0,
-    },
-    visible: { opacity: 1, y: 0, x: 0 },
-  };
-
   return (
     <div
-      ref={ref}
-      className={className}
-      style={{ width, position: "relative", ...style }}
+      className={`w-full relative ${className}`}
+      style={{ width, ...style }}
     >
-      <motion.div
-        variants={variants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        transition={{ duration: 0.6, ease: "easeOut", delay }}
-      >
-        {children}
-      </motion.div>
+      {children}
     </div>
   );
 }
