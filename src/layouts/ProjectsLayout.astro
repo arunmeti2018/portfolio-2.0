@@ -5,7 +5,6 @@ import Header from "@components/Header.astro";
 import Layout from "./Layout.astro";
 import { TbBrandGithub, TbExternalLink } from "react-icons/tb";
 import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
-import ScrollReveal from "@components/ScrollReveal";
 import { withBase } from "@utils/base";
 
 export interface Project {
@@ -40,30 +39,27 @@ const { frontmatter } = Astro.props;
   <main id="main-content" class="px-4 sm:px-6">
     {/* ===== HEADER ===== */}
     <section class="max-w-4xl mx-auto pt-24 sm:pt-20 pb-10">
-      <ScrollReveal client:visible>
-        <span
-          class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 mb-4 block"
-          >Things I've Built</span
-        >
-        <h1
-          class="font-serif text-3xl sm:text-4xl text-skin-base leading-tight mb-3"
-        >
-          Projects
-        </h1>
-        <p class="text-sm text-skin-base/50 leading-relaxed max-w-lg">
-          Web applications and projects — from full-stack apps to interactive
-          games.
-        </p>
-      </ScrollReveal>
+      <span
+        class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40 mb-4 block"
+        >Things I've Built</span
+      >
+      <h1
+        class="font-serif text-3xl sm:text-4xl text-skin-base leading-tight mb-3"
+      >
+        Projects
+      </h1>
+      <p class="text-sm text-skin-base/50 leading-relaxed max-w-lg">
+        Web applications and projects — from full-stack apps to interactive
+        games.
+      </p>
     </section>
 
     {/* ===== PROJECT LIST ===== */}
     <section class="max-w-4xl mx-auto pb-12">
       <div class="flex flex-col gap-5">
         {
-          frontmatter.projects.map((project, i) => (
-            <ScrollReveal client:visible delay={0.04 * i}>
-              <article class="group flex flex-col sm:flex-row border border-skin-line/15 rounded-sm hover:border-skin-line/35 transition-all duration-300">
+          frontmatter.projects.map((project) => (
+            <article class="group flex flex-col sm:flex-row border border-skin-line/15 rounded-sm hover:border-skin-line/35 transition-all duration-300">
                 <div class="sm:w-48 md:w-56 shrink-0 p-5 sm:p-6 flex items-center justify-center bg-skin-fill/20 border-b sm:border-b-0 sm:border-r border-skin-line/10">
                   {project.imageSrcLight && project.imageSrcDark ? (
                     <>
@@ -140,7 +136,6 @@ const { frontmatter } = Astro.props;
                   </div>
                 </div>
               </article>
-            </ScrollReveal>
           ))
         }
       </div>

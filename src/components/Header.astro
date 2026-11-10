@@ -266,18 +266,7 @@ const { activeNav } = Astro.props;
       html.setAttribute("data-theme", nextTheme);
       localStorage.setItem("theme", nextTheme);
 
-      // Force WebKit/Safari to repaint ALL elements.
-      // Safari caches composited layers and skips repainting off-screen
-      // elements when CSS custom properties change. Cycling display:none
-      // on body forces a full render-tree teardown and rebuild.
-      // This runs synchronously so the browser never renders "none".
       if (document.body) {
-        const sx = window.scrollX, sy = window.scrollY;
-        document.body.style.display = "none";
-        void document.body.offsetHeight;
-        document.body.style.display = "";
-        window.scrollTo(sx, sy);
-
         const bgColor = window.getComputedStyle(document.body).backgroundColor;
         document
           .querySelector("meta[name='theme-color']")
@@ -294,7 +283,7 @@ const { activeNav } = Astro.props;
   }
 
   setupThemeToggle();
-  document.addEventListener("astro:after-swap", setupThemeToggle);
+  document.addEventListener("astro:page-load", setupThemeToggle);
 </script>
 
 <script>
@@ -307,6 +296,8 @@ const { activeNav } = Astro.props;
 
     const desktop = document.querySelector("#main-header") as HTMLElement;
     const mobile = document.querySelector("#mobile-header") as HTMLElement;
+    desktop?.style.setProperty("transform", "translateY(0)");
+    mobile?.style.setProperty("transform", "translateY(0)");
     let lastY = window.scrollY;
     let ticking = false;
 
@@ -338,7 +329,7 @@ const { activeNav } = Astro.props;
   }
 
   setupScrollNav();
-  document.addEventListener("astro:after-swap", setupScrollNav);
+  document.addEventListener("astro:page-load", setupScrollNav);
 </script>
 
 <script>
@@ -360,7 +351,7 @@ const { activeNav } = Astro.props;
   }
 
   setupSearchButtons();
-  document.addEventListener("astro:after-swap", setupSearchButtons);
+  document.addEventListener("astro:page-load", setupSearchButtons);
 </script>
 
 <script>
@@ -398,6 +389,9 @@ const { activeNav } = Astro.props;
       closeIcon?.classList.add("hidden");
     }
 
+    // Always ensure closed state on initialization
+    closeDropdown();
+
     toggle?.addEventListener(
       "click",
       (e) => {
@@ -410,12 +404,12 @@ const { activeNav } = Astro.props;
 
     backdrop?.addEventListener("click", closeDropdown, { signal });
 
-    // Close on navigation
+    // Close immediately on navigation
     dropdown?.querySelectorAll("a").forEach((link) => {
       link.addEventListener(
         "click",
         () => {
-          setTimeout(closeDropdown, 100);
+          closeDropdown();
         },
         { signal },
       );
@@ -439,5 +433,13 @@ const { activeNav } = Astro.props;
   }
 
   setupMobileDropdown();
-  document.addEventListener("astro:after-swap", setupMobileDropdown);
+  document.addEventListener("astro:page-load", setupMobileDropdown);
+  document.addEventListener("astro:before-preparation", () => {
+    const dropdown = document.querySelector("#mobile-dropdown");
+    const backdrop = document.querySelector("#mobile-backdrop");
+    dropdown?.classList.remove("opacity-100", "visible", "scale-100");
+    dropdown?.classList.add("opacity-0", "invisible", "scale-95");
+    backdrop?.classList.remove("pointer-events-auto", "bg-black/20");
+    backdrop?.classList.add("pointer-events-none", "bg-black/0");
+  });
 </script>

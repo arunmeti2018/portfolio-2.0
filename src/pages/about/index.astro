@@ -3,7 +3,6 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import ClimbingBackToTop from "@components/ClimbingBackToTop.astro";
-import ScrollReveal from "@components/ScrollReveal";
 import { SITE } from "@config";
 import { withBase } from "@utils/base";
 import { TbArrowRight, TbCode, TbMovie, TbBrain } from "react-icons/tb";
@@ -112,115 +111,107 @@ import { TbArrowRight, TbCode, TbMovie, TbBrain } from "react-icons/tb";
 
     {/* ===== INTERESTS & CURATIONS ===== */}
     <section class="w-full mt-12 sm:mt-16">
-      <ScrollReveal client:visible>
-        <div class="flex items-baseline justify-between mb-5">
-          <h2 class="font-serif text-xl sm:text-2xl text-skin-base">What I Care About</h2>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40">Explorations</span>
-        </div>
-      </ScrollReveal>
+      <div class="flex items-baseline justify-between mb-5">
+        <h2 class="font-serif text-xl sm:text-2xl text-skin-base">What I Care About</h2>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-skin-base/40">Explorations</span>
+      </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Tech Card */}
-        <ScrollReveal client:visible delay={0.05}>
-          <a
-            href={withBase("/tech/")}
-            class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
-          >
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-2.5 h-2.5 rounded-full"
-                    style="background: rgb(var(--color-collection-tech))"
-                  ></span>
-                  <span
-                    class="font-mono text-xs uppercase tracking-widest font-medium"
-                    style="color: rgb(var(--color-collection-tech))"
-                  >
-                    Tech
-                  </span>
-                </div>
-                <TbCode className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
+        <a
+          href={withBase("/tech/")}
+          class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-2.5 h-2.5 rounded-full"
+                  style="background: rgb(var(--color-collection-tech))"
+                ></span>
+                <span
+                  class="font-mono text-xs uppercase tracking-widest font-medium"
+                  style="color: rgb(var(--color-collection-tech))"
+                >
+                  Tech
+                </span>
               </div>
-              <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
-                Open-source software, high-performance computing, cloud architectures, and the craft of reliable engineering.
-              </p>
+              <TbCode className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
             </div>
-            <span
-              class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
-            >
-              Explore Tech <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </a>
-        </ScrollReveal>
+            <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
+              Open-source software, high-performance computing, cloud architectures, and the craft of reliable engineering.
+            </p>
+          </div>
+          <span
+            class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
+          >
+            Explore Tech <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </a>
 
         {/* Cinema Card */}
-        <ScrollReveal client:visible delay={0.1}>
-          <a
-            href={withBase("/cinema/")}
-            class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
-          >
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-2.5 h-2.5 rounded-full"
-                    style="background: rgb(var(--color-collection-cinema))"
-                  ></span>
-                  <span
-                    class="font-mono text-xs uppercase tracking-widest font-medium"
-                    style="color: rgb(var(--color-collection-cinema))"
-                  >
-                    Cinema
-                  </span>
-                </div>
-                <TbMovie className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
+        <a
+          href={withBase("/cinema/")}
+          class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-2.5 h-2.5 rounded-full"
+                  style="background: rgb(var(--color-collection-cinema))"
+                ></span>
+                <span
+                  class="font-mono text-xs uppercase tracking-widest font-medium"
+                  style="color: rgb(var(--color-collection-cinema))"
+                >
+                  Cinema
+                </span>
               </div>
-              <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
-                Films as philosophy, the poetry of visual framing, storytelling craft, and scenes that refuse to leave your memory.
-              </p>
+              <TbMovie className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
             </div>
-            <span
-              class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
-            >
-              Explore Cinema <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </a>
-        </ScrollReveal>
+            <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
+              Films as philosophy, the poetry of visual framing, storytelling craft, and scenes that refuse to leave your memory.
+            </p>
+          </div>
+          <span
+            class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
+          >
+            Explore Cinema <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </a>
 
         {/* Philosophy Card */}
-        <ScrollReveal client:visible delay={0.15}>
-          <a
-            href={withBase("/philosophy/")}
-            class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
-          >
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                  <span
-                    class="w-2.5 h-2.5 rounded-full"
-                    style="background: rgb(var(--color-collection-philosophy))"
-                  ></span>
-                  <span
-                    class="font-mono text-xs uppercase tracking-widest font-medium"
-                    style="color: rgb(var(--color-collection-philosophy))"
-                  >
-                    Philosophy
-                  </span>
-                </div>
-                <TbBrain className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
+        <a
+          href={withBase("/philosophy/")}
+          class="group flex flex-col justify-between h-full p-5 sm:p-6 rounded-xl border border-skin-line/15 bg-skin-card/30 hover:bg-skin-card/70 hover:border-skin-line/30 hover:shadow-sm transition-all duration-300"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-2.5 h-2.5 rounded-full"
+                  style="background: rgb(var(--color-collection-philosophy))"
+                ></span>
+                <span
+                  class="font-mono text-xs uppercase tracking-widest font-medium"
+                  style="color: rgb(var(--color-collection-philosophy))"
+                >
+                  Philosophy
+                </span>
               </div>
-              <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
-                Questions that refuse to settle — ethics, metaphysics, consciousness, and what it means to live thoughtfully.
-              </p>
+              <TbBrain className="w-4 h-4 text-skin-base/30 group-hover:text-skin-base/70 transition-colors" />
             </div>
-            <span
-              class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
-            >
-              Explore Philosophy <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </a>
-        </ScrollReveal>
+            <p class="text-xs sm:text-sm text-skin-base/60 leading-relaxed font-normal">
+              Questions that refuse to settle — ethics, metaphysics, consciousness, and what it means to live thoughtfully.
+            </p>
+          </div>
+          <span
+            class="mt-5 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-skin-base/40 group-hover:text-skin-base transition-colors"
+          >
+            Explore Philosophy <TbArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </a>
       </div>
     </section>
 

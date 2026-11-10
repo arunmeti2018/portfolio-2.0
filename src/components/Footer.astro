@@ -97,5 +97,5 @@ const { noMarginTop = false } = Astro.props;
     });
   }
   initSubscribeForm();
-  document.addEventListener("astro:after-swap", initSubscribeForm);
+  document.addEventListener("astro:page-load", initSubscribeForm);
 </script>

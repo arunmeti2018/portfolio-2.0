@@ -62,8 +62,8 @@ const structuredData = isArticle
 
 <!doctype html>
 <html
-  lang=`${LOCALE.lang ?? "en"}`
-  class={`${scrollSmooth && "scroll-smooth"}`}
+  lang={LOCALE.lang ?? "en"}
+  class={scrollSmooth ? "scroll-smooth" : undefined}
 >
   <head>
     <!-- Google tag (gtag.js) -->

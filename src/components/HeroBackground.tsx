@@ -10,16 +10,16 @@ const HeroBackground = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);
+    let height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight);
 
     // --- CONFIGURATION ---
     const isMobile = width < 768;
-    const PARTICLE_COUNT = isMobile ? 300 : 1200; // Dense mist
-    const MOUSE_RADIUS = 200;
-    const DRAG = 0.95; // Fluid viscosity (0.9=thick, 0.99=thin)
-    const GRAVITY_X = 0.2; // Constant wind flow
-    const GRAVITY_Y = 0.05; // Slight drop
+    const PARTICLE_COUNT = isMobile ? 50 : 350; // Optimized mist
+    const MOUSE_RADIUS = 150;
+    const DRAG = 0.95;
+    const GRAVITY_X = 0.15;
+    const GRAVITY_Y = 0.03;
 
     let particles: AerosolParticle[] = [];
     const mouse = {
@@ -121,14 +121,11 @@ const HeroBackground = () => {
     };
 
     const animate = () => {
-      // Create trails using semi-transparent clear
-      ctx.fillStyle = "rgba(var(--color-fill), 0.2)"; // Assumes dark/light background
-      // Use composite operation to ensure trails fade correctly on any background color
       ctx.globalCompositeOperation = "destination-out";
-      ctx.fillStyle = `rgba(0, 0, 0, 0.15)`; // Trail Fade Rate
+      ctx.fillStyle = `rgba(0, 0, 0, 0.15)`;
       ctx.fillRect(0, 0, width, height);
 
-      ctx.globalCompositeOperation = "source-over"; // Reset
+      ctx.globalCompositeOperation = "source-over";
 
       particles.forEach((p) => {
         p.update();
@@ -142,21 +139,19 @@ const HeroBackground = () => {
     animate();
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
+      height = canvas.height = canvas.parentElement?.clientHeight || window.innerHeight;
       init();
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      // Calculate velocity
       mouse.vx = e.clientX - rect.left - mouse.prevX;
       mouse.vy = e.clientY - rect.top - mouse.prevY;
       mouse.prevX = mouse.x = e.clientX - rect.left;
       mouse.prevY = mouse.y = e.clientY - rect.top;
     };
 
-    // Passive listeners for performance
     window.addEventListener("resize", handleResize, { passive: true });
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
@@ -169,7 +164,7 @@ const HeroBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none mix-blend-screen opacity-90"
+      className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-75 dark:mix-blend-screen"
     />
   );
 };
